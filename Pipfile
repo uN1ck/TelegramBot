@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+flask = "*"
+requests = "*"
+gunicorn = "*"
+python-telegram-bot = "*"
+pymongo = "*"
+
+[requires]
+python_version = "3.6"
