@@ -3,6 +3,7 @@
 Данный модуль отвечает за обработку комманд, присланных пользователями телеграм-боту
 
 """
+import json
 import os
 from enum import Enum
 
@@ -19,6 +20,15 @@ CLIENT = MongoClient(os.environ.get('MONGODB_URI'))
 class USER_TYPE(Enum):
     TEAM = 0,
     MASTER = 1,
+
+
+"""
+{
+"owner": <owner_name -> user_id>,
+"address": <address -> str>,
+"worker": <worker_name -> user_id or None>
+}
+"""
 
 
 def send_reply(response):
@@ -46,38 +56,64 @@ def command_help(arguments, message):
 
 def command_team(arguments, message):
     database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    collection = database[os.environ.get('MONGO_COLLECTION')]
+    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
+    works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
     response = {'chat_id': message['chat']['id']}
 
-    user = collection.find_one({"username": message['chat']['username']})
+    user = users_collection.find_one({"username": message['chat']['username']})
     if user is None:
         user = {
             "username": message['chat']['username'],
             "user_type": USER_TYPE.TEAM.value,
             "chat_id": message['chat']['id']
         }
-        collection.insert(user)
+        users_collection.insert(user)
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Бригада.".format(message["from"].get("first_name"))
+        works = works_collection.find({})
+        keyboard = {'inline_keyboard':
+                        [[{"text": work['address'], "callback_data": "edit_work:" + work['_id']}] for work in works]
+                    }
+        response['reply_markup'] = json.dumps(keyboard)
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
     return response
 
 
+def command_on_work(argumants, message):
+    pass
+
+
+def command_edit_work(arguments, message):
+    pass
+
+
+def command_do_work(arguments, message):
+    pass
+
+
 def command_master(arguments, message):
     database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    collection = database[os.environ.get('MONGO_COLLECTION')]
+    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
+    works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
     response = {'chat_id': message['chat']['id']}
 
-    user = collection.find_one({"username": message['chat']['username']})
+    user = users_collection.find_one({"username": message['chat']['username']})
     if user is None:
         user = {
             "username": message['chat']['username'],
             "user_type": USER_TYPE.MASTER.value,
             "chat_id": message['chat']['id']
         }
-        collection.insert(user)
+        users_collection.insert(user)
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(message["from"].get("first_name"))
+
+        works = works_collection.find({})
+        keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "/add_object"}]]}
+        for work in works:
+            keyboard['inline_keyboard'] += [{"text": work['address'], "callback_data": "edit_work:" + work['_id']}]
+        response['reply_markup'] = json.dumps(keyboard)
+
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
@@ -182,4 +218,3 @@ def index():
     """
     # fixme закрыть от внешних доступов?
     return 'КАМОН, оно завелось кек!'
-
