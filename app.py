@@ -109,9 +109,10 @@ def command_master(arguments, message):
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(message["from"].get("first_name"))
 
         works = works_collection.find({})
-        keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "/add_object"}]]}
+        keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": {"data": "", "message": "/add_object"}}]]}
         for work in works:
-            keyboard['inline_keyboard'] += [{"text": work['address'], "callback_data": "edit_work:" + work['_id']}]
+            keyboard['inline_keyboard'] += [
+                {"text": work['address'], "callback_data": {"data": "", "message": "/edit_work " + work['_id']}}]
         response['reply_markup'] = json.dumps(keyboard)
 
     else:
