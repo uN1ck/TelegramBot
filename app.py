@@ -127,8 +127,8 @@ def command_stop(arguments, message):
            :param message: Объект полученного сообщения от пользователя
        """
     database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    collection = database[os.environ.get('MONGO_COLLECTION')]
-    collection.delete_many({"username": message['chat']['username']})
+    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
+    users_collection.delete_many({"username": message['chat']['username']})
 
     response = {'chat_id': message['chat']['id'], 'text': "До свидания, {}!".format(message["from"].get("first_name"))}
     return response
