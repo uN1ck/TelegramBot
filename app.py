@@ -156,6 +156,7 @@ def button_callback(data, message):
     calc_data = [line for line in data.split('+') if line.strip() != '']
     current_command = calc_data[-1][:-1]
     last_data = '+'.join(calc_data) + '+'
+    print(current_command, message, last_data)
     response = CMD.get(current_command, command_not_found)(message, last_data)
     return response
 
