@@ -16,7 +16,6 @@ API = requests.Session()
 APP = Flask(__name__)
 CLIENT = MongoClient(os.environ.get('MONGODB_URI'))
 
-
 class USER_TYPE(Enum):
     TEAM = 0,
     MASTER = 1,
@@ -43,6 +42,7 @@ def command_help(arguments, message):
         result.append(command)
     response['text'] = "\n\t".join(result)
     return response
+
 
 
 def command_team(arguments, message):
@@ -95,6 +95,7 @@ def command_master(arguments, message):
             keyboard['inline_keyboard'] += [
                 {"text": work['address'], "callback_data": {"data": "www", "message": "edit_work " + work['_id']}}]
         response['reply_markup'] = json.dumps(keyboard)
+        response["text"] = "Привет"
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
