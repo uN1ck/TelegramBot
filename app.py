@@ -22,15 +22,6 @@ class USER_TYPE(Enum):
     MASTER = 1,
 
 
-"""
-{
-"owner": <owner_name -> user_id>,
-"address": <address -> str>,
-"worker": <worker_name -> user_id or None>
-}
-"""
-
-
 def send_reply(response):
     """
     Функция отправки сообщения ботом пользователю
@@ -71,25 +62,14 @@ def command_team(arguments, message):
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Бригада.".format(message["from"].get("first_name"))
         works = works_collection.find({})
         keyboard = {'inline_keyboard':
-                        [[{"text": work['address'], "callback_data": "edit_work:" + work['_id']}] for work in works]
+                        [[{"text": work['address'],
+                           "callback_data": {"data": "addobject", "message": "edit_work:" + work['_id']}}] for work in works]
                     }
         response['reply_markup'] = json.dumps(keyboard)
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
     return response
-
-
-def command_on_work(argumants, message):
-    pass
-
-
-def command_edit_work(arguments, message):
-    pass
-
-
-def command_do_work(arguments, message):
-    pass
 
 
 def command_master(arguments, message):
@@ -109,7 +89,8 @@ def command_master(arguments, message):
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(message["from"].get("first_name"))
 
         works = works_collection.find({})
-        keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": {"data": "", "message": "/add_object"}}]]}
+        keyboard = {
+            'inline_keyboard': [[{"text": "Добавить объект", "callback_data": {"data": "addobject", "message": "add_object"}}]]}
         for work in works:
             keyboard['inline_keyboard'] += [
                 {"text": work['address'], "callback_data": {"data": "", "message": "/edit_work " + work['_id']}}]
