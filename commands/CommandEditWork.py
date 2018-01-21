@@ -18,6 +18,7 @@ class CommandEditWork(Command):
                 [{"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
             ]}
         response = {
+            'method': 'editMessageText',
             'chat_id': arguments[1],
             'message_id': arguments[0],
             'text': "Работа по адресу:\n{}".format("HUI"),
