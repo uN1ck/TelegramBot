@@ -10,7 +10,7 @@ class CommandEditWork(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
         work_id = arguments[0]
-        work = works_collection.find({'_id': work_id})
+        work = works_collection.find_one({'_id': work_id})
 
         keyboard = {'inline_keyboard':
             [
