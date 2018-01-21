@@ -17,5 +17,10 @@ class CommandEditWork(Command):
                 [{"text": "Отчет", "callback_data": "get_report:{}".format(work_id)}],
                 [{"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
             ]}
-        response = {'chat_id': message['chat']['id'], 'text': "{}".format(work['address']), 'reply_markup': json.dumps(keyboard)}
+        response = {
+            'chat_id': arguments[1],
+            'message_id': arguments[0],
+            'text': "Работа по адресу:\n{}".format("HUI"),
+            'reply_markup': json.dumps(keyboard)
+        }
         return response

@@ -11,6 +11,7 @@ from flask import request
 from pymongo import MongoClient
 
 from commands.CommandBrigade import CommandBrigade
+from commands.CommandCreateWork import CommandCreateWork
 from commands.CommandDefault import CommandDefault
 from commands.CommandEditWork import CommandEditWork
 from commands.CommandExit import CommandExit
@@ -32,7 +33,7 @@ PUBLIC_CMD = {
 PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),
 
-    'create_work': CommandDefault(CLIENT, API),  # fixme
+    'create_work': CommandCreateWork(CLIENT, API),
     'edit_work': CommandEditWork(CLIENT, API),  # fixme
     'delete_work': CommandDefault(CLIENT, API),  # fixme
 

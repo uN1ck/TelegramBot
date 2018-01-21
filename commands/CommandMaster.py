@@ -34,7 +34,8 @@ class CommandMaster(Command):
             }
             for work in works:
                 keyboard['inline_keyboard'].append([
-                    {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
+                    {"text": work['address'],
+                     "callback_data": "edit_work:{}".format(work['_id'], message['chat']['id'], message['message_id'])}
                 ])
             response['reply_markup'] = json.dumps(keyboard)
         else:
