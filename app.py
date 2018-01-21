@@ -12,6 +12,7 @@ from pymongo import MongoClient
 
 from commands.CommandBrigade import CommandBrigade
 from commands.CommandDefault import CommandDefault
+from commands.CommandEditWork import CommandEditWork
 from commands.CommandExit import CommandExit
 from commands.CommandMaster import CommandMaster
 
@@ -32,12 +33,11 @@ PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),
 
     'create_work': CommandDefault(CLIENT, API),  # fixme
-    'edit_work': CommandDefault(CLIENT, API),  # fixme
+    'edit_work': CommandEditWork(CLIENT, API),  # fixme
     'delete_work': CommandDefault(CLIENT, API),  # fixme
 
     'subscribe_work': CommandDefault(CLIENT, API),  # fixme
     'finish_work': CommandDefault(CLIENT, API),  # fixme
-    'get_work_info': CommandDefault(CLIENT, API),  # fixme
     'get_work_report': CommandDefault(CLIENT, API),  # fixme
 }
 
@@ -50,7 +50,10 @@ def send_reply(response):
     Функция отправки сообщения ботом пользователю
         :param response: сформированный объект ответа бота для API телеграмма
     """
-    if 'text' in response:
+    if 'method' in response:
+        API.post(os.environ.get('URL') + response['method'], data=response)
+    elif 'text' in response:
+
         API.post(os.environ.get('URL') + "sendMessage", data=response)
 
 
