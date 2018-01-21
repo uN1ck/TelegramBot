@@ -65,7 +65,7 @@ def command_team(arguments, message):
                         [[{"text": work['address'],
                            "callback_data": {"data": "addobject", "message": "edit_work:" + work['_id']}}] for work in works]
                     }
-        response['reply_markup'] = json.dumps(keyboard)
+        # response['reply_markup'] = json.dumps(keyboard)
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
