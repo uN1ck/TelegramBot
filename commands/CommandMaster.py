@@ -32,9 +32,9 @@ class CommandMaster(Command):
                 [{"text": "Добавить объект", "callback_data": "create_work:{}".format(message['update_id'])}]]
             }
             for work in works:
-                keyboard['inline_keyboard'] += [
+                keyboard['inline_keyboard'] += [[
                     {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
-                ]
+                ]]
             response['reply_markup'] = json.dumps(keyboard)
         else:
             response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
