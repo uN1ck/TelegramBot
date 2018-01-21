@@ -17,8 +17,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+            <state relative-caret-position="541">
+              <caret line="90" column="32" lean-forward="false" selection-start-line="90" selection-start-column="26" selection-end-line="90" selection-end-column="32" />
               <folding>
                 <element signature="e#120#129#0" expanded="true" />
               </folding>
@@ -51,12 +51,9 @@
       <file leaf-file-name="CommandMaster.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandMaster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="20" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="36" selection-end-column="20" />
-              <folding>
-                <marker date="1516531868414" expanded="true" signature="1284:1461" ph="..." />
-                <marker date="1516531868414" expanded="true" signature="1339:1459" ph="..." />
-              </folding>
+            <state relative-caret-position="480">
+              <caret line="32" column="93" lean-forward="false" selection-start-line="32" selection-start-column="93" selection-end-line="32" selection-end-column="93" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -667,16 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
-          <folding>
-            <element signature="e#120#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandBrigade.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -713,14 +700,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="90" column="32" lean-forward="false" selection-start-line="90" selection-start-column="26" selection-end-line="90" selection-end-column="32" />
+          <folding>
+            <element signature="e#120#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandMaster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="20" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="36" selection-end-column="20" />
-          <folding>
-            <marker date="1516531868414" expanded="true" signature="1284:1461" ph="..." />
-            <marker date="1516531868414" expanded="true" signature="1339:1459" ph="..." />
-          </folding>
+        <state relative-caret-position="480">
+          <caret line="32" column="93" lean-forward="false" selection-start-line="32" selection-start-column="93" selection-end-line="32" selection-end-column="93" />
+          <folding />
         </state>
       </provider>
     </entry>
