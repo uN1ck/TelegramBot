@@ -163,23 +163,25 @@ def webhook_handler():
     Главный путь приема запросов для бота
     """
     if request.method == "POST":
-        # retrieve the message in JSON and then transform it to Telegram object
         update = request.get_json()
-        print(update)
-
-        if 'callback_query' in update:
-            try:
+        try:
+            # retrieve the message in JSON and then transform it to Telegram object
+            print("Update JSON data:{}".format(update))
+            if 'callback_query' in update:
                 response = button_callback(update['callback_query']['data'], update['callback_query']['message'])
                 send_reply(response)
-            except Exception as ex:
-                print(ex)
-        else:
+            else:
+                message = update['message']
+                text = message['text']
+                if text[0] == '/':
+                    command, *arguments = text.split(" ", 1)
+                    response = CMD.get(command, command_not_found)(arguments, message)
+                    send_reply(response)
+        except Exception as ex:
+            print(ex)
             message = update['message']
-            text = message['text']
-            if text[0] == '/':
-                command, *arguments = text.split(" ", 1)
-                response = CMD.get(command, command_not_found)(arguments, message)
-                send_reply(response)
+            response = {'chat_id': message['chat']['id'], 'text': "Ошибка ебаная".format(message["from"].get("first_name"))}
+            send_reply(response)
     return 'OK'
 
 
