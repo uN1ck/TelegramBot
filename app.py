@@ -4,7 +4,6 @@
 
 """
 import os
-from enum import Enum
 
 import requests
 from flask import Flask
@@ -18,11 +17,6 @@ from commands.CommandMaster import CommandMaster
 API = requests.Session()
 APP = Flask(__name__)
 CLIENT = MongoClient(os.environ.get('MONGODB_URI'))
-
-
-class USER_TYPE(Enum):
-    TEAM = 0,
-    MASTER = 1,
 
 
 def send_reply(response):
@@ -58,9 +52,9 @@ def button_callback(data, message):
 
 
 PUBLIC_CMD = {
-    '/управление': CommandMaster(),
-    '/бригада': CommandBrigade(),
-    '/выход': CommandExit(),
+    '/управление': CommandMaster(CLIENT, API),
+    '/бригада': CommandBrigade(CLIENT, API),
+    '/выход': CommandExit(CLIENT, API),
 }
 PRIVATE_CMD = {
     'create_work': None,
