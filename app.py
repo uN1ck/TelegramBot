@@ -179,9 +179,6 @@ def webhook_handler():
                     send_reply(response)
         except Exception as ex:
             print(ex)
-            message = update['message']
-            response = {'chat_id': message['chat']['id'], 'text': "Ошибка ебаная".format(message["from"].get("first_name"))}
-            send_reply(response)
     return 'OK'
 
 
