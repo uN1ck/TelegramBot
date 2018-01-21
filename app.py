@@ -97,7 +97,7 @@ def command_master(arguments, message):
             ]}
         for work in works:
             keyboard['inline_keyboard'] += [
-                {"text": work['address'], "callback_data": "return+hui"}]
+                {"text": work['address'], "callback_data": ""}]
         response['reply_markup'] = json.dumps(keyboard)
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
@@ -168,8 +168,11 @@ def webhook_handler():
         print(update)
 
         if 'callback_query' in update:
-            response = button_callback(update['callback_query']['data'], update['callback_query']['message'])
-            send_reply(response)
+            try:
+                response = button_callback(update['callback_query']['data'], update['callback_query']['message'])
+                send_reply(response)
+            except Exception as ex:
+                print(ex)
         else:
             message = update['message']
             text = message['text']
