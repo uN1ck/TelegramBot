@@ -31,12 +31,12 @@ class CommandMaster(Command):
             keyboard = {'inline_keyboard': [
                 [{"text": "Добавить объект", "callback_data": "create_work:{}".format(message['update_id'])}]]
             }
-            print(works)
+            print("WORK LIST: {}".format(works))
             for work in works:
                 keyboard['inline_keyboard'] += [[
                     {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
                 ]]
-            print(keyboard)
+            print("KEYBOARD MARKUP:{}".format(keyboard))
             response['reply_markup'] = json.dumps(keyboard)
         else:
             response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
