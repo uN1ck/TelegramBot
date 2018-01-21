@@ -58,9 +58,9 @@ def button_callback(data, message):
 
 
 PUBLIC_CMD = {
-    '/управление': CommandMaster,
-    '/бригада': CommandBrigade,
-    '/выход': CommandExit,
+    '/управление': CommandMaster(),
+    '/бригада': CommandBrigade(),
+    '/выход': CommandExit(),
 }
 PRIVATE_CMD = {
     'create_work': None,
