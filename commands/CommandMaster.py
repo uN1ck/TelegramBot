@@ -33,9 +33,9 @@ class CommandMaster(Command):
             }
             print("WORK LIST: {}".format(works))
             for work in works:
-                keyboard['inline_keyboard'] += [[
+                keyboard['inline_keyboard'].append([
                     {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
-                ]]
+                ])
             print("KEYBOARD MARKUP:{}".format(keyboard))
             response['reply_markup'] = json.dumps(keyboard)
         else:
