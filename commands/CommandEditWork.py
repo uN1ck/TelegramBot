@@ -19,8 +19,8 @@ class CommandEditWork(Command):
             ]}
         response = {
             'method': 'editMessageText',
+            'message_id': arguments[2],
             'chat_id': arguments[1],
-            'message_id': arguments[0],
             'text': "Работа по адресу:\n{}".format("HUI"),
             'reply_markup': json.dumps(keyboard)
         }
