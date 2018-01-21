@@ -3,7 +3,6 @@
 Данный модуль отвечает за обработку комманд, присланных пользователями телеграм-боту
 
 """
-import json
 import os
 from enum import Enum
 
@@ -11,6 +10,10 @@ import requests
 from flask import Flask
 from flask import request
 from pymongo import MongoClient
+
+from commands.CommandBrigade import CommandBrigade
+from commands.CommandExit import CommandExit
+from commands.CommandMaster import CommandMaster
 
 API = requests.Session()
 APP = Flask(__name__)
@@ -31,94 +34,6 @@ def send_reply(response):
         API.post(os.environ.get('URL') + "sendMessage", data=response)
 
 
-def command_help(arguments, message):
-    """
-    Функция определяющая ответ на команду /help
-        :param arguments: Аргументы команды (/command argument1 argument2 ...)
-        :param message: Объект полученного сообщения от пользователя
-    """
-    response = {'chat_id': message['chat']['id']}
-    result = ["Здравствуйте, {}!\nЯ бот и умею выполнять следующие команды:".format(message["from"].get("first_name"))]
-    for command in CMD:
-        result.append(command)
-    response['text'] = "\n\t".join(result)
-    return response
-
-
-def command_team(arguments, message):
-    database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
-    works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
-    response = {'chat_id': message['chat']['id']}
-
-    user = users_collection.find_one({"username": message['chat']['username']})
-    if user is None:
-        user = {
-            "username": message['chat']['username'],
-            "user_type": USER_TYPE.TEAM.value,
-            "chat_id": message['chat']['id']
-        }
-        users_collection.insert(user)
-        response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Бригада.".format(message["from"].get("first_name"))
-        works = works_collection.find({})
-        keyboard = {'inline_keyboard':
-                        [[{"text": work['address'],
-                           "callback_data": {"data": "addobject", "message": "edit_work:" + work['_id']}}] for work in works]
-                    }
-        # response['reply_markup'] = json.dumps(keyboard)
-    else:
-        response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
-
-    return response
-
-
-def command_master(arguments, message):
-    database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
-    works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
-    response = {'chat_id': message['chat']['id']}
-
-    user = users_collection.find_one({"username": message['chat']['username']})
-    if user is None:
-        user = {
-            "username": message['chat']['username'],
-            "user_type": USER_TYPE.MASTER.value,
-            "chat_id": message['chat']['id']
-        }
-        users_collection.insert(user)
-        response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(message["from"].get("first_name"))
-
-        works = list(works_collection.find({}))
-        keyboard = {
-            'inline_keyboard': [
-                [
-                    {"text": "Добавить объект", "callback_data": "return+hui"}
-                ]
-            ]}
-        for work in works:
-            keyboard['inline_keyboard'] += [
-                {"text": work['address'], "callback_data": ""}]
-        response['reply_markup'] = json.dumps(keyboard)
-    else:
-        response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
-
-    return response
-
-
-def command_stop(arguments, message):
-    """
-       Функция определяющая ответ на команду /stop. надо удалить chat_id в монго
-           :param arguments: Аргументы команды (/command argument1 argument2 ...)
-           :param message: Объект полученного сообщения от пользователя
-       """
-    database = CLIENT[os.environ.get('MONGO_DBNAME')]
-    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
-    users_collection.delete_many({"username": message['chat']['username']})
-
-    response = {'chat_id': message['chat']['id'], 'text': "До свидания, {}!".format(message["from"].get("first_name"))}
-    return response
-
-
 def command_not_found(arguments, message):
     """
     Функция, отвечающая пользователю в случае введения неизвестной команды
@@ -137,20 +52,29 @@ def button_callback(data, message):
         :param message: Объект полученного сообщения от пользователя
     """
     response = {'chat_id': message['chat']['id']}
-    calc_data = [line for line in data.split('+') if line.strip() != '']
-    current_command = calc_data[-1][:-1]
-    last_data = '+'.join(calc_data) + '+'
-    print(current_command, message, last_data)
-    response = CMD.get(current_command, command_not_found)(message, last_data)
+    data = [line for line in data.split(':') if line.strip() != '']
+    response = CMD.get(data[0], command_not_found)(data[1:], message)
     return response
 
 
-CMD = {
-    '/помощь': command_help,
-    '/управление': command_master,
-    '/бригада': command_team,
-    '/выйти': command_stop,
+PUBLIC_CMD = {
+    '/управление': CommandMaster,
+    '/бригада': CommandBrigade,
+    '/выход': CommandExit,
 }
+PRIVATE_CMD = {
+    'create_work': None,
+    'edit_work': None,
+    'delete_work': None,
+
+    'subscribe_work': None,
+    'finish_work': None,
+    'get_work_info': None,
+    'get_work_report': None
+}
+
+CMD = PRIVATE_CMD.copy()
+CMD.update(PRIVATE_CMD)
 
 """
 Сервер-апи бота
@@ -175,7 +99,7 @@ def webhook_handler():
                 text = message['text']
                 if text[0] == '/':
                     command, *arguments = text.split(" ", 1)
-                    response = CMD.get(command, command_not_found)(arguments, message)
+                    response = PUBLIC_CMD.get(command, command_not_found)(arguments, message)
                     send_reply(response)
         except Exception as ex:
             print(ex)
