@@ -55,7 +55,7 @@ def command_team(arguments, message):
     if user is None:
         user = {
             "username": message['chat']['username'],
-            "user_type": USER_TYPE.TEAM.value,
+            "user_type": int(USER_TYPE.TEAM.value),
             "chat_id": message['chat']['id']
         }
         users_collection.insert(user)
@@ -82,7 +82,7 @@ def command_master(arguments, message):
     if user is None:
         user = {
             "username": message['chat']['username'],
-            "user_type": USER_TYPE.MASTER.value,
+            "user_type": int(USER_TYPE.MASTER.value),
             "chat_id": message['chat']['id']
         }
         users_collection.insert(user)
@@ -93,9 +93,8 @@ def command_master(arguments, message):
             'inline_keyboard': [[{"text": "Добавить объект", "callback_data": {"data": "addobject", "message": "add_object"}}]]}
         for work in works:
             keyboard['inline_keyboard'] += [
-                {"text": work['address'], "callback_data": {"data": "", "message": "/edit_work " + work['_id']}}]
+                {"text": work['address'], "callback_data": {"data": "www", "message": "edit_work " + work['_id']}}]
         response['reply_markup'] = json.dumps(keyboard)
-
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
