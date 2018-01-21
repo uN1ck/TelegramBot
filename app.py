@@ -3,6 +3,7 @@
 Данный модуль отвечает за обработку комманд, присланных пользователями телеграм-боту
 
 """
+import json
 import os
 from enum import Enum
 
@@ -88,13 +89,13 @@ def command_master(arguments, message):
         response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(message["from"].get("first_name"))
 
         works = works_collection.find({})
+        print(works)
         keyboard = {
             'inline_keyboard': [[{"text": "Добавить объект", "callback_data": {"data": "addobject", "message": "add_object"}}]]}
-        for work in works:
-            keyboard['inline_keyboard'] += [
-                {"text": work['address'], "callback_data": {"data": "www", "message": "edit_work " + work['_id']}}]
-            # response['reply_markup'] = json.dumps(keyboard)
-            # response["text"] = "Привет"
+        # for work in works:
+        #     keyboard['inline_keyboard'] += [
+        #         {"text": work['address'], "callback_data": {"data": "www", "message": "edit_work " + work['_id']}}]
+        response['reply_markup'] = json.dumps(keyboard)
     else:
         response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
