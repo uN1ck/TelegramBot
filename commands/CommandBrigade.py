@@ -23,14 +23,11 @@ class CommandBrigade(Command):
                 "chat_id": message['chat']['id']
             }
             users_collection.insert(user)
-            response['text'] = "Здравствуйте, {}! Вы зарегистрировались как Бригада.".format(message["from"].get("first_name"))
+            response['text'] = "Здравствуйте, {}! Вы зарегистрировались как Бригада. Выберите объект для работы:".format(message["from"].get("first_name"))
 
             works = list(works_collection.find({}))
 
-            keyboard = {'inline_keyboard': [
-                [{"text": "Добавить объект",
-                  "callback_data": "create_work:{}:{}".format(message['chat']['id'], message['message_id'])}]]
-            }
+            keyboard = {'inline_keyboard': []}
             for work in works:
                 keyboard['inline_keyboard'].append([
                     {"text": work['address'],
