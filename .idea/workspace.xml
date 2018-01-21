@@ -51,9 +51,12 @@
       <file leaf-file-name="CommandMaster.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandMaster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-              <folding />
+            <state relative-caret-position="540">
+              <caret line="36" column="20" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="36" selection-end-column="20" />
+              <folding>
+                <marker date="1516531868414" expanded="true" signature="1284:1461" ph="..." />
+                <marker date="1516531868414" expanded="true" signature="1339:1459" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -712,9 +715,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandMaster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="540">
+          <caret line="36" column="20" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="36" selection-end-column="20" />
+          <folding>
+            <marker date="1516531868414" expanded="true" signature="1284:1461" ph="..." />
+            <marker date="1516531868414" expanded="true" signature="1339:1459" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
