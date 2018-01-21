@@ -31,14 +31,14 @@ PUBLIC_CMD = {
 PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),
 
-    'create_work': None,
-    'edit_work': None,
-    'delete_work': None,
+    'create_work': CommandDefault(CLIENT, API),  # fixme
+    'edit_work': CommandDefault(CLIENT, API),  # fixme
+    'delete_work': CommandDefault(CLIENT, API),  # fixme
 
-    'subscribe_work': None,
-    'finish_work': None,
-    'get_work_info': None,
-    'get_work_report': None
+    'subscribe_work': CommandDefault(CLIENT, API),  # fixme
+    'finish_work': CommandDefault(CLIENT, API),  # fixme
+    'get_work_info': CommandDefault(CLIENT, API),  # fixme
+    'get_work_report': CommandDefault(CLIENT, API),  # fixme
 }
 
 CMD = PRIVATE_CMD.copy()
