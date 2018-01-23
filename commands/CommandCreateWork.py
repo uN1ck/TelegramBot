@@ -6,7 +6,7 @@ class CommandCreateWork(Command):
         # TODO: Set state for user? to new work to be created?
         response = {
             # 'method': 'editMessageText',
-            # 'chat_id': arguments[0],
+            'chat_id': arguments[0],
             # 'message_id': arguments[1],
             'text': "Задайте адрес для работы:",
         }

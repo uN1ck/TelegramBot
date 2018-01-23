@@ -54,7 +54,6 @@ def send_reply(response):
     if 'method' in response:
         API.post(os.environ.get('URL') + response['method'], data=response)
     elif 'text' in response:
-
         API.post(os.environ.get('URL') + "sendMessage", data=response)
 
 
