@@ -12,7 +12,7 @@ class CommandEditWork(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
         work_id = arguments[0]
-        # work = works_collection.find_one({'_id': ObjectId(work_id)})
+        work = works_collection.find_one({'_id': ObjectId(work_id)})
 
         keyboard = {'inline_keyboard': [
             [{"text": "Отчет", "callback_data": "get_report:{}".format(work_id)},
@@ -20,7 +20,7 @@ class CommandEditWork(Command):
         ]}
         response = {
             'chat_id': message['chat']['id'],
-            'text': "Работа по адресу:\n{}".format("HUI"),
+            'text': "Работа по адресу:\n{}".format(work),
             'reply_markup': json.dumps(keyboard)
         }
         return response
