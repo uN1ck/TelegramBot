@@ -20,7 +20,7 @@ class CommandEditWork(Command):
         response = {
             # 'method': 'editMessageText',
             # 'message_id': arguments[2],
-            'chat_id': arguments[1],
+            'chat_id': message['chat']['id'],
             'text': "Работа по адресу:\n{}".format(work['address']),
             'reply_markup': json.dumps(keyboard)
         }
