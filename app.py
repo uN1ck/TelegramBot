@@ -110,7 +110,7 @@ def webhook_handler():
                     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
                     print("COMMAND: {}".format(command))
-                    response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])([], message)
+                    response = CMD.get(command, PRIVATE_CMD['default'])([], message)
                     print("RESPONSE: {}".format(response))
                     send_reply(response)
                 # elif 'photo' in message:
