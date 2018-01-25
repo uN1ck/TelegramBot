@@ -20,7 +20,7 @@ class CommandCreateWork(Command):
         _id = works_collection.insert(work)
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
-            {"$set": {'command': '/accept_work_name:{}'.format(_id)}})
+            {"$set": {'command': 'accept_work_name:{}'.format(_id)}})
         response = {
             'chat_id': arguments[0],
             'text': 'Задайте адрес для работы:',
