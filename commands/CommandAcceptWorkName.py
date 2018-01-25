@@ -13,8 +13,8 @@ class CommandAcceptWorkName(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         # users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-        work = works_collection.find_one_and_update({'_id': arguments[0]},
-                                                    {'address': message['text']})
+        work = works_collection.update_one({'_id': arguments[0]},
+                                           {'$set': {'address': message['text']}})
 
         response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы ({}) задан'.format(work)}
         works = list(works_collection.find({}))
