@@ -12,7 +12,7 @@ class CommandAcceptWorkName(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-        work = works_collection.find_one_and_update(arguments[0],
+        work = works_collection.find_one_and_update({"_id": arguments[0]},
                                                     {"$set": {"address": message['text']}})
         users_collection.find_one_and_update({'username': message['chat']['username']},
                                              {"$set": {'command': 'accept_photo:{}'.format(work['_id'])}})
