@@ -1,3 +1,4 @@
+import json
 import os
 
 from commands.Command import Command
@@ -15,8 +16,18 @@ class CommandAcceptWorkName(Command):
                                                     {"$set": {"address": message['text']}})
         users_collection.find_one_and_update({'username': message['chat']['username']},
                                              {"$set": {'command': 'accept_photo:{}'.format(work['_id'])}})
-        response = {'chat_id': message['chat']['id'],
-                    "text": "Вы подписаны на работу по адресу:\n{}\nОтправляйте фотографии с объекта в чат:".format(
-                        work['address'])}
+        response = {'chat_id': message['chat']['id'], "text": "Адрес работы задан"}
+        works = list(works_collection.find({}))
+        keyboard = {'inline_keyboard': [
+            [{"text": "Добавить объект",
+              "callback_data": "create_work:{}:{}".format(message['chat']['id'], message['message_id'])}]]
+        }
+        for work in works:
+            keyboard['inline_keyboard'].append([{"text": work['address'],
+                                                 "callback_data": "edit_work:{}:{}:{}".format(work['_id'],
+                                                                                              message['chat']['id'],
+                                                                                              message['message_id'])}
+                                                ])
+        response['reply_markup'] = json.dumps(keyboard)
 
         return response
