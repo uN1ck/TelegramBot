@@ -17,10 +17,10 @@ class CommandCreateWork(Command):
             "address": None,
             "brigade": None
         }
-        _id = works_collection.insert_one(work)
+        result = works_collection.insert_one(work)
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
-            {"$set": {'command': 'accept_work_name:{}'.format(_id)}})
+            {"$set": {'command': 'accept_work_name:{}'.format(result.inserted_id)}})
         response = {
             'chat_id': arguments[0],
             'text': 'Задайте адрес для работы:',
