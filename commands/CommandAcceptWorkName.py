@@ -1,8 +1,6 @@
 import json
 import os
 
-from pymongo import ReturnDocument
-
 from commands.Command import Command
 
 
@@ -16,9 +14,10 @@ class CommandAcceptWorkName(Command):
         # users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
         work = works_collection.find_one_and_update({"_id": arguments[0]},
-                                                    {"$set": {"address": message['text']}}, return_document=ReturnDocument.AFTER)
+                                                    {"$set": {"address": message['text']}})
 
         response = {'chat_id': message['chat']['id'], "text": "Адрес работы ({}) задан".format(work)}
+        response['debug'] = arguments
         works = list(works_collection.find({}))
 
         keyboard = {'inline_keyboard': [
