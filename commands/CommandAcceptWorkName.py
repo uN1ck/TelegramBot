@@ -19,14 +19,11 @@ class CommandAcceptWorkName(Command):
         response = {'chat_id': message['chat']['id'], "text": "Адрес работы задан"}
         works = list(works_collection.find({}))
         keyboard = {'inline_keyboard': [
-            [{"text": "Добавить объект",
-              "callback_data": "create_work:{}:{}".format(message['chat']['id'], message['message_id'])}]]
-        }
+            [{"text": "Добавить объект", "callback_data": "create_work:{}".format(message['chat']['id'])}]
+        ]}
         for work in works:
             keyboard['inline_keyboard'].append([{"text": work['address'],
-                                                 "callback_data": "edit_work:{}:{}:{}".format(work['_id'],
-                                                                                              message['chat']['id'],
-                                                                                              message['message_id'])}
+                                                 "callback_data": "edit_work:{}".format(work['_id'])}
                                                 ])
         response['reply_markup'] = json.dumps(keyboard)
 

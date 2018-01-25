@@ -13,12 +13,12 @@ class CommandEditWork(Command):
 
         if work is not None:
             response = {
-                'chat_id': arguments[1],
+                'chat_id': message['chat']['id'],
                 'text': "Работа по адресу:\n{}\n Успешно удалена".format(work['address']),
             }
         else:
             response = {
-                'chat_id': arguments[1],
+                'chat_id': message['chat']['id'],
                 'text': "Работа не найдена",
             }
         return response
