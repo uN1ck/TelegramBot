@@ -18,7 +18,7 @@ class CommandAcceptWorkName(Command):
         work = works_collection.update_one({'_id': ObjectId(arguments[0])},
                                            {'$set': {'address': message['text']}}).raw_result
 
-        response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы ({}) задан'.format(work)}
+        response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан'}
         works = list(works_collection.find({}))
 
         keyboard = {'inline_keyboard': [

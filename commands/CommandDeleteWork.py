@@ -1,5 +1,7 @@
 import os
 
+from bson import ObjectId
+
 from commands.Command import Command
 
 
@@ -9,7 +11,7 @@ class CommandDeleteWork(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
         work_id = arguments[0]
-        work = works_collection.find_one_and_delete({'_id': work_id})
+        work = works_collection.find_one_and_delete({'_id': ObjectId(work_id)})
 
         if work is not None:
             response = {
