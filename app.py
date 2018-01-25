@@ -70,9 +70,9 @@ def button_callback(data, message):
     """
     response = {'chat_id': message['chat']['id']}
     data = [line for line in data.split(':') if line.strip() != '']
-    print("CALLBACK: {}".format(data))
+    # print("CALLBACK: {}".format(data))
     response = CMD.get(data[0], PRIVATE_CMD['default'])(data[1:], message)
-    print("RESPONSE: {}".format(response))
+    # print("RESPONSE: {}".format(response))
     return response
 
 
@@ -104,7 +104,9 @@ def webhook_handler():
                     database = CLIENT[os.environ.get('MONGO_DBNAME')]
                     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
+                    print("COMMAND: {}".format(command))
                     response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])([], message)
+                    print("RESPONSE: {}".format(response))
                     send_reply(response)
                 # elif 'photo' in message:
                 #     response = CommandAcceptPhoto(CLIENT, API)([], message)
