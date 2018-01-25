@@ -75,9 +75,9 @@ def button_callback(data, message):
     """
     response = {'chat_id': message['chat']['id']}
     data = [line for line in data.split(':') if line.strip() != '']
-    # print("CALLBACK: {}".format(data))
+    print("CALLBACK: {}".format(data))
     response = CMD.get(data[0], PRIVATE_CMD['default'])(data[1:], message)
-    # print("RESPONSE: {}".format(response))
+    print("RESPONSE: {}".format(response))
     return response
 
 
