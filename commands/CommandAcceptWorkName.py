@@ -1,6 +1,8 @@
 import json
 import os
 
+from bson import ObjectId
+
 from commands.Command import Command
 
 
@@ -13,7 +15,7 @@ class CommandAcceptWorkName(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         # users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-        work = works_collection.update_one({'_id': arguments[0]},
+        work = works_collection.update_one({'_id': ObjectId(arguments[0])},
                                            {'$set': {'address': message['text']}}).raw_result
 
         response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы ({}) задан'.format(work)}
