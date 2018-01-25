@@ -13,9 +13,12 @@ from pymongo import MongoClient
 from commands.CommandBrigade import CommandBrigade
 from commands.CommandCreateWork import CommandCreateWork
 from commands.CommandDefault import CommandDefault
+from commands.CommandDeleteWork import CommandDeleteWork
 from commands.CommandEditWork import CommandEditWork
 from commands.CommandExit import CommandExit
+from commands.CommandGetWorkReport import CommandGetWorkReport
 from commands.CommandMaster import CommandMaster
+from commands.CommandSubscribeWork import CommandSubscribeWork
 
 API = requests.Session()
 APP = Flask(__name__)
@@ -34,12 +37,14 @@ PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),
 
     'create_work': CommandCreateWork(CLIENT, API),
-    'edit_work': CommandEditWork(CLIENT, API),  # fixme
-    'delete_work': CommandDefault(CLIENT, API),  # fixme
+    'edit_work': CommandEditWork(CLIENT, API),
+    'delete_work': CommandDeleteWork(CLIENT, API),
 
-    'subscribe_work': CommandDefault(CLIENT, API),  # fixme
+    'subscribe_work': CommandSubscribeWork(CLIENT, API),
     'finish_work': CommandDefault(CLIENT, API),  # fixme
-    'get_work_report': CommandDefault(CLIENT, API),  # fixme
+    'get_work_report': CommandGetWorkReport(CLIENT, API),
+
+    'work_list': CommandDefault(CLIENT, API),  # fixme
 }
 
 CMD = PRIVATE_CMD.copy()
@@ -82,8 +87,7 @@ def webhook_handler():
     if request.method == "POST":
         update = request.get_json()
         try:
-            # retrieve the message in JSON and then transform it to Telegram object
-            print("Update JSON data:{}".format(update))
+            print(" --> Update JSON data:{}".format(update))
             if 'callback_query' in update:
                 response = button_callback(update['callback_query']['data'], update['callback_query']['message'])
                 send_reply(response)
@@ -94,6 +98,16 @@ def webhook_handler():
                     command, *arguments = text.split(" ", 1)
                     response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])(arguments, message)
                     send_reply(response)
+                else:
+                    database = CLIENT[os.environ.get('MONGO_DBNAME')]
+                    users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
+                    command = users_collection.find_one({'username': message['chat']['username']})['command']
+                    response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])([], message)
+                    send_reply(response)
+                # elif 'photo' in message:
+                #     response = CommandAcceptPhoto(CLIENT, API)([], message)
+                #     send_reply(response)
+
         except Exception as ex:
             print(ex)
     return 'OK'

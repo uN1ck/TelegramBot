@@ -20,7 +20,8 @@ class CommandMaster(Command):
             user = {
                 "username": message['chat']['username'],
                 "user_type": USER_TYPE.MASTER.value,
-                "chat_id": message['chat']['id']
+                "chat_id": message['chat']['id'],
+                "command": "default"
             }
             users_collection.insert(user)
             response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(

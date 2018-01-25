@@ -1,4 +1,3 @@
-import json
 import os
 
 from commands.Command import Command
@@ -10,18 +9,16 @@ class CommandEditWork(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
         work_id = arguments[0]
-        work = works_collection.find_one({'_id': work_id})
+        work = works_collection.find_one_and_delete({'_id': work_id})
 
-        keyboard = {'inline_keyboard':
-            [
-                [{"text": "Отчет", "callback_data": "get_report:{}".format(work_id)}],
-                [{"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
-            ]}
-        response = {
-            # 'method': 'editMessageText',
-            # 'message_id': arguments[2],
-            'chat_id': arguments[1],
-            'text': "Работа по адресу:\n{}".format("HUI"),
-            'reply_markup': json.dumps(keyboard)
-        }
+        if work is not None:
+            response = {
+                'chat_id': arguments[1],
+                'text': "Работа по адресу:\n{}\n Успешно удалена".format(work['address']),
+            }
+        else:
+            response = {
+                'chat_id': arguments[1],
+                'text': "Работа не найдена",
+            }
         return response

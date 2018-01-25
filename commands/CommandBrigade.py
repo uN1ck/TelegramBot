@@ -20,19 +20,18 @@ class CommandBrigade(Command):
             user = {
                 "username": message['chat']['username'],
                 "user_type": USER_TYPE.TEAM.value,
-                "chat_id": message['chat']['id']
+                "chat_id": message['chat']['id'],
+                "command": "default"
             }
             users_collection.insert(user)
-            response['text'] = "Здравствуйте, {}! Вы зарегистрировались как Бригада. Выберите объект для работы:".format(message["from"].get("first_name"))
+            response['text'] = "Здравствуйте, {}! Вы зарегистрировались как Бригада. Выберите объект для работы:".format(
+                message["from"].get("first_name"))
 
             works = list(works_collection.find({}))
 
-            keyboard = {'inline_keyboard': []}
-            for work in works:
-                keyboard['inline_keyboard'].append([
-                    {"text": work['address'],
-                     "callback_data": "subscribe_work:{}]".format(work['_id'])}
-                ])
+            keyboard = {'inline_keyboard': [
+                [{"text": work['address'], "callback_data": "subscribe_work:{}]".format(work['_id'])}] for work in works
+            ]}
             response['reply_markup'] = json.dumps(keyboard)
         else:
             response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
