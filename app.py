@@ -10,6 +10,8 @@ from flask import Flask
 from flask import request
 from pymongo import MongoClient
 
+from commands.CommandAcceptPhoto import CommandAcceptPhoto
+from commands.CommandAcceptWorkName import CommandAcceptWorkName
 from commands.CommandBrigade import CommandBrigade
 from commands.CommandCreateWork import CommandCreateWork
 from commands.CommandDefault import CommandDefault
@@ -43,6 +45,9 @@ PRIVATE_CMD = {
     'subscribe_work': CommandSubscribeWork(CLIENT, API),
     'finish_work': CommandDefault(CLIENT, API),  # fixme
     'get_work_report': CommandGetWorkReport(CLIENT, API),
+
+    'accept_work_name': CommandAcceptWorkName(CLIENT, API),
+    'accept_photo': CommandAcceptPhoto(CLIENT, API),
 
     'work_list': CommandDefault(CLIENT, API),  # fixme
 }

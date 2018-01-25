@@ -16,7 +16,11 @@ class CommandAcceptPhoto(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         response = {'chat_id': message['chat']['id']}
 
+        work = works_collection.find_one({"_id": arguments[0]})
         user = users_collection.find_one({"username": message['chat']['username']})
+        print("WORK:{}".format(work))
+        print("USER:{}".format(user))
+
         if user is None:
             if user['user_type'] == USER_TYPE.MASTER.value:
                 # TODO: Писать по адресу с работкой
