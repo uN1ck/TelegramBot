@@ -31,7 +31,7 @@ class CommandMaster(Command):
 
             keyboard = {'inline_keyboard': [
                 [{"text": "Добавить объект",
-                  "callback_data": "create_work:{}:{}".format(message['chat']['id'], message['message_id'])}]]
+                  "callback_data": "create_work"}]]
             }
             for work in works:
                 keyboard['inline_keyboard'].append([

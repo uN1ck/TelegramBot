@@ -22,7 +22,7 @@ class CommandCreateWork(Command):
             {'username': message['chat']['username']},
             {"$set": {'command': 'accept_work_name:{}'.format(result.inserted_id)}})
         response = {
-            'chat_id': arguments[0],
+            'chat_id': message['chat']['id'],
             'text': 'Задайте адрес для работы:',
         }
         return response
