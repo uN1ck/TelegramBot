@@ -21,7 +21,6 @@ class CommandCreateWork(Command):
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
             {'command': '/accept_work_name:{}'.format(_id)})
-
         response = {
             'chat_id': message['chat']['id'],
             'text': 'Задайте адрес для работы:',

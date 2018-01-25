@@ -72,6 +72,7 @@ def button_callback(data, message):
     data = [line for line in data.split(':') if line.strip() != '']
     print("CALLBACK: {}".format(data))
     response = CMD.get(data[0], PRIVATE_CMD['default'])(data[1:], message)
+    print("RESPONSE: {}".format(response))
     return response
 
 
