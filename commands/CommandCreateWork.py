@@ -17,7 +17,7 @@ class CommandCreateWork(Command):
             "address": None,
             "brigade": None
         }
-        _id = works_collection.insert(work)
+        _id = works_collection.insert_one(work)
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
             {"$set": {'command': 'accept_work_name:{}'.format(_id)}})
