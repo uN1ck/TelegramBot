@@ -29,10 +29,7 @@ class CommandMaster(Command):
 
             works = list(works_collection.find({}))
 
-            keyboard = {'inline_keyboard': [
-                [{"text": "Добавить объект",
-                  "callback_data": "create_work"}]]
-            }
+            keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
             for work in works:
                 keyboard['inline_keyboard'].append([
                     {"text": work['address'],

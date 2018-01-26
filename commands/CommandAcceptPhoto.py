@@ -23,7 +23,6 @@ class CommandAcceptPhoto(Command):
 
         if user is None:
             if user['user_type'] == USER_TYPE.MASTER.value:
-                # TODO: Писать по адресу с работкой
 
                 photo_count = 0
                 for file in message['file']:
