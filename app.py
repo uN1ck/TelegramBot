@@ -73,7 +73,6 @@ def button_callback(data, message):
         :param data: data вернувшаяся с кнопки (callback_data)
         :param message: Объект полученного сообщения от пользователя
     """
-    response = {'chat_id': message['chat']['id']}
     data = [line for line in data.split(':') if line.strip() != '']
     print("CALLBACK: {}".format(data))
     response = CMD.get(data[0], PRIVATE_CMD['default'])(data[1:], message)
