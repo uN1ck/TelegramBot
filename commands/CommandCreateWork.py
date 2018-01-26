@@ -17,6 +17,7 @@ class CommandCreateWork(Command):
             "address": None,
             "brigade": None,
             "photo_count": 0,
+            "messages": []
         }
         result = works_collection.insert_one(work)
         users_collection.find_one_and_update(

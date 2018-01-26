@@ -107,7 +107,7 @@ def webhook_handler():
                         command, *arguments = text.split(" ", 1)
                         response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])(arguments, message)
                         send_reply(response)
-                if 'photo' in message:
+                if 'photo' in message or 'text' in message:
                     database = CLIENT[os.environ.get('MONGO_DBNAME')]
                     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
