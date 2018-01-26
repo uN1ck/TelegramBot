@@ -29,11 +29,12 @@ class CommandAcceptPhoto(Command):
                     url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_path)
 
                     current_directory = os.getcwd()
-                    final_directory = os.path.join(current_directory, r'photo_{}_{}'.format(datetime.now(), work['address']))
+                    final_directory = os.path.join(current_directory,
+                                                   r'photo_{}_{}'.format(datetime.now().date(), hash(work['address'])))
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
-                        response['debug'] = [current_directory, final_directory, "dir_created"]
-                    response['debug'] = [current_directory, final_directory]
+                        response['debug'] = [current_directory, final_directory, file_path, "dir_created"]
+                    response['debug'] = [current_directory, final_directory, file_path]
 
                     try:
                         response['debug'] += [request.urlretrieve(url, "nqq")]
