@@ -15,7 +15,7 @@ class CommandEditWork(Command):
         work = works_collection.find_one({'_id': ObjectId(work_id)})
 
         keyboard = {'inline_keyboard': [
-            [{"text": "Отчет", "callback_data": "get_report:{}".format(work_id)},
+            [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
              {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
         ]}
         response = {
