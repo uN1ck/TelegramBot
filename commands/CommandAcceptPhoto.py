@@ -1,6 +1,6 @@
 import os
+import pathlib
 from datetime import datetime
-from urllib import request
 
 from bson import ObjectId
 
@@ -24,30 +24,24 @@ class CommandAcceptPhoto(Command):
         if user is not None:
             if user['user_type'] == USER_TYPE.TEAM.value:
                 photo_count = 0
-                for file in message['photo']:
-                    file_response = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
+                file = message['photo'][3]
+                file_response = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
+                if 'content' in file_response:
+                    file_response = file_response['content']
 
-                    if 'file_path' in file_response:
-                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
-                                                                              file_response['file_path'])
-                    elif 'file_path' in file:
-                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file['file_path'])
-                    else:
-                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), "")
+                # if 'file_path' in file_response:
+                #     url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
+                #                                                           file_response['file_path'])
 
-                    current_directory = os.getcwd()
-                    final_directory = os.path.join(current_directory,
-                                                   'photo_{}_{}'.format(datetime.now().date(), hash(work['address'])))
-                    if not os.path.exists(final_directory):
-                        os.makedirs(final_directory)
-                        response['debug'] = [current_directory, final_directory, file_response, os.path.exists(final_directory),
-                                             "dir_created"]
-                    response['debug'] = [current_directory, final_directory, file_response, os.path.exists(final_directory)]
+                current_directory = os.getcwd()
+                final_directory = os.path.join(current_directory, '{}'.format(datetime.now().date()))
+                pathlib.Path(final_directory).mkdir(parents=True, exist_ok=True)
+                response['debug'] = [current_directory, final_directory, file_response, os.path.exists(final_directory)]
 
-                    try:
-                        response['debug'] += [request.urlretrieve(url, "nqq")]
-                    except Exception as ex:
-                        response['debug'] += [ex]
+                # try:
+                #     response['debug'] += [request.urlretrieve(url, "nqq")]
+                # except Exception as ex:
+                #     response['debug'] += [ex]
 
                 works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                      {'$set': {'photo_count': work['photo_count'] + photo_count}})
