@@ -16,17 +16,21 @@ class CommandMenu(Command):
 
         response = {'chat_id': message['chat']['id']}
         works = list(works_collection.find({}))
+        response['text'] = "хуй"
+        return response
 
         user = users_collection.find_one({"username": message['chat']['username']})
         if user['user_type'] == USER_TYPE.MASTER.value:
+
             keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
+
             for work in works:
                 if work['address'] is not None:
-                    keyboard['inline_keyboard'].append([
-                        {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
-                    ])
+                    keyboard['inline_keyboard'].append(
+                        [{"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}])
             response['reply_markup'] = json.dumps(keyboard)
         elif user['user_type'] == USER_TYPE.TEAM.value:
+
             keyboard = {'inline_keyboard': [
                 [{"text": work['address'], "callback_data": "subscribe_work:{}]".format(work['_id'])}] for work in works
             ]}
