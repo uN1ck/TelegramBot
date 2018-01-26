@@ -16,7 +16,6 @@ class CommandDeleteWork(Command):
 
         response = {'chat_id': message['chat']['id']}
         works = list(works_collection.find({}))
-
         keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
         for work in works:
             keyboard['inline_keyboard'].append([
@@ -26,7 +25,7 @@ class CommandDeleteWork(Command):
         response['reply_markup'] = json.dumps(keyboard)
 
         if work is not None:
-            response = {'text': "Работа по адресу:\n{}\nУспешно удалена".format(work['address'])}
+            response['text'] = "Работа по адресу:\n{}\nУспешно удалена".format(work['address'])
         else:
-            response = {'text': "Работа не найдена"}
+            response['text'] = "Работа не найдена"
         return response
