@@ -16,9 +16,10 @@ class CommandSubscribeWork(Command):
 
         response = {'chat_id': message['chat']['id']}
 
-        user = users_collection.find_one({"username": message['chat']['username']})
-        work = works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                    {"brigade": user['_id'], "command": 'accept_photo'})
+        user = users_collection.update_one({"username": message['chat']['username']},
+                                           {{"$set": {'command': 'accept_photo:{}'.format(arguments[0])}}})
+        work = works_collection.update_one({"_id": ObjectId(arguments[0])},
+                                           {"brigade": user['_id']})
         response["text"] = "Вы подписаны на работу по адресу:\n{}\nОтправляйте фотографии с объекта в чат:".format(work.address)
 
         return response
