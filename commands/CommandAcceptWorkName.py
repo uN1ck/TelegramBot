@@ -25,7 +25,9 @@ class CommandAcceptWorkName(Command):
             [{'text': 'Добавить объект', 'callback_data': 'create_work'}]
         ]}
         for work in works:
-            keyboard['inline_keyboard'].append([{'text': work['address'], 'callback_data': 'edit_work:{}'.format(work['_id'])}])
+            if work['address'] is not None:
+                keyboard['inline_keyboard'].append(
+                    [{'text': work['address'], 'callback_data': 'edit_work:{}'.format(work['_id'])}])
         response['reply_markup'] = json.dumps(keyboard)
 
         return response
