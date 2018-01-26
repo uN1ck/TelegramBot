@@ -16,12 +16,9 @@ class CommandMenu(Command):
 
         response = {'chat_id': message['chat']['id']}
         works = list(works_collection.find({}))
-        response['text'] = "хуй"
         user = users_collection.find_one({"username": message['chat']['username']})
         if user['user_type'] == USER_TYPE.MASTER.value:
-
             keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
-
             for work in works:
                 if work['address'] is not None:
                     keyboard['inline_keyboard'].append(
