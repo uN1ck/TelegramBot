@@ -41,8 +41,9 @@ class CommandAcceptPhoto(Command):
 
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
-                response['debug'] = user
+
                 response["text"] = "Вам не положено присылать фотографии"
         else:
+            response['debug'] = [user, work]
             response["text"] = "Вам не положено присылать фотографии"
         return response
