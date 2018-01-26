@@ -15,15 +15,11 @@ class CommandDeleteWork(Command):
 
         if work is not None:
             response = {
-                'method': 'editMessageText',
-                'message_id': message['id'],
                 'chat_id': message['chat']['id'],
                 'text': "Работа по адресу:\n{}\n Успешно удалена".format(work['address']),
             }
         else:
             response = {
-                'method': 'editMessageText',
-                'message_id': message['id'],
                 'chat_id': message['chat']['id'],
                 'text': "Работа не найдена",
             }
