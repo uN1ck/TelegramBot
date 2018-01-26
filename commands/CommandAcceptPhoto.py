@@ -24,12 +24,12 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
 
                 if 'photo' in message:
-                    self._save_photo(message)
+                    self._save_photo(message)  # fixme implement
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'photo_count': work['photo_count'] + 1}})
                 elif 'text' in message:
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                         {'$set': {'text_list': work['messages'] + [message['text']]}})
+                                                         {'$set': {'messages': work['messages'] + [message['text']]}})
                 response["text"] = "Принято по дате {}".format(datetime.now().date())
             else:
                 response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]

@@ -18,6 +18,5 @@ class CommandGetWorkReport(Command):
         work = works_collection.find_one({"_id": ObjectId(arguments[0])})
 
         # TODO: Upload file logs
-        response["text"] = "Работа по адерсу\n{}\nСообщения от бригады:".format(work.address)
-
+        response["text"] = "Работа по адерсу\n{}\nСообщения от бригады:\n{}".format(work.address, "\n".join(work['messages']))
         return response

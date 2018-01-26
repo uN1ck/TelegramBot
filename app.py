@@ -101,13 +101,15 @@ def webhook_handler():
                 send_reply(response)
             else:
                 message = update['message']
-                if 'text' in message:
-                    text = message['text']
-                    if text[0] == '/':
-                        command, *arguments = text.split(" ", 1)
-                        response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])(arguments, message)
-                        send_reply(response)
-                if 'photo' in message or 'text' in message:
+                if 'text' in message and message['text'][0] == '/':
+                    command, *arguments = message['text'].split(" ", 1)
+                    response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])(arguments, message)
+                    send_reply(response)
+                elif 'photo' in message or 'text' in message:
+                    #
+                    # Получаем комманду которую надо выполнить
+                    # TODO: Вынести по архитектуре куда-нибудь
+                    #
                     database = CLIENT[os.environ.get('MONGO_DBNAME')]
                     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
@@ -117,6 +119,7 @@ def webhook_handler():
                     response = CMD.get(command[0], PRIVATE_CMD['default'])(command[1:], message)
                     print("@RESPONSE: {}".format(response))
                     send_reply(response)
+
                 # elif 'photo' in message:
                 #     response = CommandAcceptPhoto(CLIENT, API)([], message)
                 #     send_reply(response)
