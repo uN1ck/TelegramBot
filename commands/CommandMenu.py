@@ -19,16 +19,18 @@ class CommandMenu(Command):
 
         user = users_collection.find_one({"username": message['chat']['username']})
         if user['user_type'] == USER_TYPE.MASTER.value:
-            keyboard = {'inline_keyboard': [
-                [{"text": work['address'], "callback_data": "edit_work:{}]".format(work['_id'])}] for work in works
-            ]}
+            keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
+            for work in works:
+                keyboard['inline_keyboard'].append([
+                    {"text": work['address'], "callback_data": "edit_work:{}".format(work['_id'])}
+                ])
             response['reply_markup'] = json.dumps(keyboard)
-        elif user['user_type'] == USER_TYPE.USER.value:
+        elif user['user_type'] == USER_TYPE.TEAM.value:
             keyboard = {'inline_keyboard': [
                 [{"text": work['address'], "callback_data": "subscribe_work:{}]".format(work['_id'])}] for work in works
             ]}
             response['reply_markup'] = json.dumps(keyboard)
         else:
-            pass
+            response['text'] = "Нельзя использовать эту комманду"
 
         return response

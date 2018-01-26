@@ -20,6 +20,7 @@ from commands.CommandEditWork import CommandEditWork
 from commands.CommandExit import CommandExit
 from commands.CommandGetWorkReport import CommandGetWorkReport
 from commands.CommandMaster import CommandMaster
+from commands.CommandMenu import CommandMenu
 from commands.CommandSubscribeWork import CommandSubscribeWork
 
 API = requests.Session()
@@ -34,6 +35,7 @@ PUBLIC_CMD = {
     '/управление': CommandMaster(CLIENT, API),
     '/бригада': CommandBrigade(CLIENT, API),
     '/выход': CommandExit(CLIENT, API),
+    '/меню': CommandMenu(CLIENT, API),
 }
 PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),

@@ -22,7 +22,7 @@ class CommandAcceptPhoto(Command):
         work = works_collection.find_one({"_id": ObjectId(arguments[0])})
 
         if user is not None:
-            if user['user_type'] == USER_TYPE.MASTER.value:
+            if user['user_type'] == USER_TYPE.TEAM.value:
                 photo_count = 0
                 for file in message['photo']:
                     file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
