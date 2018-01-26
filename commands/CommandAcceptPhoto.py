@@ -25,7 +25,7 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
                 photo_count = 0
                 for file in message['photo']:
-                    file_response = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id']).content
+                    file_response = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
 
                     if 'file_path' in file_response:
                         url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
