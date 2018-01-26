@@ -40,8 +40,9 @@ class CommandAcceptPhoto(Command):
                                                    r'photo_{}_{}'.format(datetime.now().date(), hash(work['address'])))
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
-                        response['debug'] = [current_directory, final_directory, file_response, "dir_created"]
-                    response['debug'] = [current_directory, final_directory, file_response]
+                        response['debug'] = [current_directory, final_directory, file_response, os.path.exists(final_directory),
+                                             "dir_created"]
+                    response['debug'] = [current_directory, final_directory, file_response, os.path.exists(final_directory)]
 
                     try:
                         response['debug'] += [request.urlretrieve(url, "nqq")]
