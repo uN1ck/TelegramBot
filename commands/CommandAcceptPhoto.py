@@ -32,8 +32,13 @@ class CommandAcceptPhoto(Command):
                     final_directory = os.path.join(current_directory, r'photo_{}_{}'.format(datetime.now(), work['address']))
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
+                        response['debug'] = [current_directory, "dir_created"]
+                    response['debug'] = [current_directory]
 
-                    response['debug'] = request.urlretrieve(url, file_path)
+                    try:
+                        response['debug'] += [request.urlretrieve(url, file_path)]
+                    except Exception as ex:
+                        response['debug'] += [ex]
 
                 works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                      {'photo_count': work['photo_count'] + photo_count})
