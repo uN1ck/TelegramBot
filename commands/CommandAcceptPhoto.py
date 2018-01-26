@@ -41,7 +41,7 @@ class CommandAcceptPhoto(Command):
                         response['debug'] += [ex]
 
                 works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                     {'photo_count': work['photo_count'] + photo_count})
+                                                     {'$set': {'photo_count': work['photo_count'] + photo_count}})
 
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
