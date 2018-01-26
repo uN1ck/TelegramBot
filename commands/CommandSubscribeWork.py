@@ -20,6 +20,7 @@ class CommandSubscribeWork(Command):
                                            {{"$set": {'command': 'accept_photo:{}'.format(arguments[0])}}})
         work = works_collection.update_one({"_id": ObjectId(arguments[0])},
                                            {"brigade": user['_id']})
-        response["text"] = "Вы подписаны на работу по адресу:\n{}\nОтправляйте фотографии с объекта в чат:".format(work.address)
+        response["text"] = "Вы подписаны на работу по адресу:\n{}\nОтправляйте фотографии с объекта в чат:".format(
+            work['address'])
 
         return response
