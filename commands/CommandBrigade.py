@@ -19,7 +19,7 @@ class CommandBrigade(Command):
         if user is None:
             user = {
                 "username": message['chat']['username'],
-                "user_type": int(USER_TYPE.TEAM.value),
+                "user_type": USER_TYPE.TEAM.value,
                 "chat_id": message['chat']['id'],
                 "command": "default"
             }
