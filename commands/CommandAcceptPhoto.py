@@ -19,6 +19,7 @@ class CommandAcceptPhoto(Command):
         response = {'chat_id': message['chat']['id']}
 
         user = users_collection.find_one({"username": message['chat']['username']})
+        work = works_collection.find_one({"_id": ObjectId(arguments[0])})
 
         if user is None:
             if user['user_type'] == USER_TYPE.MASTER.value:
@@ -27,7 +28,7 @@ class CommandAcceptPhoto(Command):
                 photo_count = 0
                 for file in message['file']:
                     file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
-                    url = "https://api.telegram.org/file/bot{}/<file_path>".format(os.environ.get('BOT_TOKEN'), file_path)
+                    url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_path)
 
                     current_directory = os.getcwd()
                     final_directory = os.path.join(current_directory, r'photo_{}_{}'.format(datetime.now(), work['address']))
@@ -35,7 +36,7 @@ class CommandAcceptPhoto(Command):
                         os.makedirs(final_directory)
 
                     response['debug'] = request.urlretrieve(url, file_path)
-                work = works_collection.find_one({"_id": ObjectId(arguments[0])})
+
                 works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                      {'photo_count': work['photo_count'] + photo_count})
 

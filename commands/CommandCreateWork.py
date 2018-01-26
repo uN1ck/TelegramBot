@@ -15,7 +15,8 @@ class CommandCreateWork(Command):
         work = {
             "master": message['chat']['username'],
             "address": None,
-            "brigade": None
+            "brigade": None,
+            "photo_count": 0,
         }
         result = works_collection.insert_one(work)
         users_collection.find_one_and_update(
