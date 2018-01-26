@@ -21,7 +21,7 @@ class CommandAcceptPhoto(Command):
         user = users_collection.find_one({"username": message['chat']['username']})
         work = works_collection.find_one({"_id": ObjectId(arguments[0])})
 
-        if user is None:
+        if user is not None:
             if user['user_type'] == USER_TYPE.MASTER.value:
 
                 photo_count = 0
@@ -41,9 +41,8 @@ class CommandAcceptPhoto(Command):
 
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
-
+                response['debug'] = [user, work]
                 response["text"] = "Вам не положено присылать фотографии"
         else:
-            response['debug'] = [user, work]
             response["text"] = "Вам не положено присылать фотографии"
         return response
