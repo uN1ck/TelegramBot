@@ -25,16 +25,22 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
                 photo_count = 0
                 for file in message['photo']:
-                    file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id']).content
-                    url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_path)
+                    file_response = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id']).content
+
+                    if 'file_path' in file_response:
+                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
+                                                                              file_response['file_path'])
+                    else:
+                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
+                                                                              file['file_path'])
 
                     current_directory = os.getcwd()
                     final_directory = os.path.join(current_directory,
                                                    r'photo_{}_{}'.format(datetime.now().date(), hash(work['address'])))
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
-                        response['debug'] = [current_directory, final_directory, file_path, "dir_created"]
-                    response['debug'] = [current_directory, final_directory, file_path]
+                        response['debug'] = [current_directory, final_directory, file_response, "dir_created"]
+                    response['debug'] = [current_directory, final_directory, file_response]
 
                     try:
                         response['debug'] += [request.urlretrieve(url, "nqq")]
