@@ -30,7 +30,7 @@ class CommandBrigade(Command):
             works = list(works_collection.find({}))
 
             keyboard = {'inline_keyboard': [
-                [{"text": work['address'], "callback_data": "subscribe_work:{}]".format(work['_id'])}] for work in works
+                [{"text": work['address'], "callback_data": "subscribe_work:{}".format(work['_id'])}] for work in works
             ]}
             response['reply_markup'] = json.dumps(keyboard)
         else:
