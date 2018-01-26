@@ -27,6 +27,12 @@ class CommandAcceptPhoto(Command):
                 for file in message['file']:
                     file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
                     url = "https://api.telegram.org/file/bot{}/<file_path>".format(os.environ.get('BOT_TOKEN'), file_path)
+
+                    current_directory = os.getcwd()
+                    final_directory = os.path.join(current_directory, r'photo_{}_{}'.format(datetime.now(), work['address']))
+                    if not os.path.exists(final_directory):
+                        os.makedirs(final_directory)
+
                     response = request.urlretrieve(url, file_path)
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
