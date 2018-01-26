@@ -30,9 +30,10 @@ class CommandAcceptPhoto(Command):
                     if 'file_path' in file_response:
                         url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
                                                                               file_response['file_path'])
+                    elif 'file_path' in file:
+                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file['file_path'])
                     else:
-                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
-                                                                              file['file_path'])
+                        url = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), "")
 
                     current_directory = os.getcwd()
                     final_directory = os.path.join(current_directory,
