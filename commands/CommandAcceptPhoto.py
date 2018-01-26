@@ -23,7 +23,6 @@ class CommandAcceptPhoto(Command):
 
         if user is not None:
             if user['user_type'] == USER_TYPE.MASTER.value:
-
                 photo_count = 0
                 for file in message['photo']:
                     file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
@@ -41,7 +40,7 @@ class CommandAcceptPhoto(Command):
 
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
-                response['debug'] = [user, work]
+                response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]
                 response["text"] = "Вам не положено присылать фотографии"
         else:
             response["text"] = "Вам не положено присылать фотографии"
