@@ -20,7 +20,7 @@ class CommandEditWork(Command):
         ]}
         response = {
             'chat_id': message['chat']['id'],
-            'text': "Работа по адресу:\n{}".format(work['address']),
+            'text': "Работа по адресу:\n{}\nФотографий: {}".format(work['address'], work['photo_count']),
             'reply_markup': json.dumps(keyboard)
         }
         return response

@@ -2,6 +2,8 @@ import os
 from datetime import datetime
 from urllib import request
 
+from bson import ObjectId
+
 from commands.Command import Command
 from util import USER_TYPE
 
@@ -16,14 +18,13 @@ class CommandAcceptPhoto(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         response = {'chat_id': message['chat']['id']}
 
-        work = works_collection.find_one({"_id": arguments[0]})
         user = users_collection.find_one({"username": message['chat']['username']})
-        print("WORK:{}".format(work))
-        print("USER:{}".format(user))
 
         if user is None:
             if user['user_type'] == USER_TYPE.MASTER.value:
                 # TODO: Писать по адресу с работкой
+
+                photo_count = 0
                 for file in message['file']:
                     file_path = self.api.post(os.environ.get('URL') + "getFile", data=file['file_id'])
                     url = "https://api.telegram.org/file/bot{}/<file_path>".format(os.environ.get('BOT_TOKEN'), file_path)
@@ -33,7 +34,11 @@ class CommandAcceptPhoto(Command):
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
 
-                    response = request.urlretrieve(url, file_path)
+                    response['debug'] = request.urlretrieve(url, file_path)
+                work = works_collection.find_one({"_id": ObjectId(arguments[0])})
+                works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
+                                                     {'photo_count': work['photo_count'] + photo_count})
+
                 response["text"] = "Принято по дате {}".format(datetime.now())
             else:
                 response["text"] = "Вам не положено присылать фотографии"
