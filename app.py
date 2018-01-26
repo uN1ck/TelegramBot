@@ -76,9 +76,7 @@ def button_callback(data, message):
         :param message: Объект полученного сообщения от пользователя
     """
     data = [line for line in data.split(':') if line.strip() != '']
-    print("CALLBACK: {}".format(data))
     response = CMD.get(data[0], PRIVATE_CMD['default'])(data[1:], message)
-    print("RESPONSE: {}".format(response))
     return response
 
 
@@ -103,7 +101,9 @@ def webhook_handler():
                 message = update['message']
                 if 'text' in message and message['text'][0] == '/':
                     command, *arguments = message['text'].split(" ", 1)
+                    print("@COMMAND: {}".format(command))
                     response = PUBLIC_CMD.get(command, PRIVATE_CMD['default'])(arguments, message)
+                    print("@RESPONSE: {}".format(response))
                     send_reply(response)
                 elif 'photo' in message or 'text' in message:
                     #
@@ -115,14 +115,8 @@ def webhook_handler():
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
                     if ':' in command:
                         command = command.split(':')
-                    print("@COMMAND: {}".format(command))
                     response = CMD.get(command[0], PRIVATE_CMD['default'])(command[1:], message)
-                    print("@RESPONSE: {}".format(response))
                     send_reply(response)
-
-                # elif 'photo' in message:
-                #     response = CommandAcceptPhoto(CLIENT, API)([], message)
-                #     send_reply(response)
 
         except Exception as ex:
             print(ex)

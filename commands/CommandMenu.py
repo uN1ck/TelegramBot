@@ -17,8 +17,6 @@ class CommandMenu(Command):
         response = {'chat_id': message['chat']['id']}
         works = list(works_collection.find({}))
         response['text'] = "хуй"
-        return response
-
         user = users_collection.find_one({"username": message['chat']['username']})
         if user['user_type'] == USER_TYPE.MASTER.value:
 
