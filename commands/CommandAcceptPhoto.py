@@ -32,11 +32,11 @@ class CommandAcceptPhoto(Command):
                     final_directory = os.path.join(current_directory, r'photo_{}_{}'.format(datetime.now(), work['address']))
                     if not os.path.exists(final_directory):
                         os.makedirs(final_directory)
-                        response['debug'] = [current_directory, "dir_created"]
-                    response['debug'] = [current_directory]
+                        response['debug'] = [current_directory, final_directory, "dir_created"]
+                    response['debug'] = [current_directory, final_directory]
 
                     try:
-                        response['debug'] += [request.urlretrieve(url, file_path)]
+                        response['debug'] += [request.urlretrieve(url, "nqq")]
                     except Exception as ex:
                         response['debug'] += [ex]
 
