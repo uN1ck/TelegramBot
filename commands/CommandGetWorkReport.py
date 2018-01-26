@@ -19,9 +19,7 @@ class CommandGetWorkReport(Command):
         response["text"] = "Вы подписаны на работу по адресу:\n{}\nОтправляйте фотографии с объекта в чат:".format(work.address)
 
         keyboard = {'inline_keyboard': [
-            [{"text": "Добавить объект",
-              "callback_data": "work_list:{}".format(user['_id'])}  # fixme
-             ]]
+            [{"text": "Добавить объект", "callback_data": "work_list:{}".format(user['_id'])}]]  # fixme
         }
         response['reply_markup'] = json.dumps(keyboard)
 
