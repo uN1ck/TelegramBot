@@ -1,3 +1,4 @@
+import json
 import os
 
 from bson import ObjectId
@@ -13,14 +14,16 @@ class CommandDeleteWork(Command):
         work_id = arguments[0]
         work = works_collection.find_one_and_delete({'_id': ObjectId(work_id)})
 
+        works = list(works_collection.find({}))
+
+        response = {'chat_id': message['chat']['id'], }
+        keyboard = {'inline_keyboard': [
+            [{"text": work['address'], "callback_data": "edit_work:{}]".format(work['_id'])}] for work in works
+        ]}
+        response['reply_markup'] = json.dumps(keyboard)
+
         if work is not None:
-            response = {
-                'chat_id': message['chat']['id'],
-                'text': "Работа по адресу:\n{}\n Успешно удалена".format(work['address']),
-            }
+            response = {'text': "Работа по адресу:\n{}\nУспешно удалена".format(work['address'])}
         else:
-            response = {
-                'chat_id': message['chat']['id'],
-                'text': "Работа не найдена",
-            }
+            response = {'text': "Работа не найдена"}
         return response
