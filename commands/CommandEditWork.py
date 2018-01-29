@@ -3,6 +3,7 @@ import os
 
 from bson import ObjectId
 
+from app import CMD
 from commands.Command import Command
 
 
@@ -14,13 +15,16 @@ class CommandEditWork(Command):
         work_id = arguments[0]
         work = works_collection.find_one({'_id': ObjectId(work_id)})
 
-        keyboard = {'inline_keyboard': [
-            [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
-             {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
-        ]}
-        response = {
-            'chat_id': message['chat']['id'],
-            'text': "Работа по адресу:\n{}\nФотографий: {}".format(work['address'], work['photo_count']),
-            'reply_markup': json.dumps(keyboard)
-        }
+        if work is None:
+            response = CMD['menu'](arguments, message)
+        else:
+            keyboard = {'inline_keyboard': [
+                [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
+                 {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
+            ]}
+            response = {
+                'chat_id': message['chat']['id'],
+                'text': "Работа по адресу:\n{}\nФотографий: {}".format(work['address'], work['photo_count']),
+                'reply_markup': json.dumps(keyboard)
+            }
         return response
