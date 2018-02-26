@@ -113,9 +113,11 @@ def webhook_handler():
                     database = CLIENT[os.environ.get('MONGO_DBNAME')]
                     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
                     command = users_collection.find_one({'username': message['chat']['username']})['command']
+                    print("#COMMAND: {}".format(command))
                     if ':' in command:
                         command = command.split(':')
                     response = CMD.get(command[0], PRIVATE_CMD['default'])(command[1:], message)
+                    print("@RESPONSE: {}".format(response))
                     send_reply(response)
 
         except Exception as ex:
