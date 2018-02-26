@@ -58,7 +58,7 @@ class CommandAcceptPhoto(Command):
             gauth.LocalWebserverAuth()
             drive = GoogleDrive(gauth)
 
-            file = drive.CreateFile({'title': '/{}/{}'.format('ololo', str(datetime.now().date()))})
+            file = drive.CreateFile({'title': file_response['result']['file_path']})
             file.SetContentFile(im)
             file.Upload()
         except Exception as ex:
