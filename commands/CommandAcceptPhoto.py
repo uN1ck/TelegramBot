@@ -52,13 +52,16 @@ class CommandAcceptPhoto(Command):
 
         img.raw.decode_content = True
         im = Image.open(img.raw)
-        gauth = GoogleAuth()
-        gauth.LocalWebserverAuth()
-        drive = GoogleDrive(gauth)
+        q = None
+        try:
+            gauth = GoogleAuth()
+            gauth.LocalWebserverAuth()
+            drive = GoogleDrive(gauth)
 
-        file = drive.CreateFile({'title': '/{}/{}'.format('ololo', str(datetime.now().date()))})
-        file.SetContentFile(im)
-        file.Upload()
-
-        resp = [im.format, im.mode, im.size]
+            file = drive.CreateFile({'title': '/{}/{}'.format('ololo', str(datetime.now().date()))})
+            file.SetContentFile(im)
+            file.Upload()
+        except Exception as ex:
+            q = ex
+        resp = [im.format, im.mode, im.size, q]
         return resp
