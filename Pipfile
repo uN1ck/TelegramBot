@@ -8,6 +8,7 @@ requests = "*"
 gunicorn = "*"
 python-telegram-bot = "*"
 pymongo = "*"
+PyDrive = "*"
 
 [requires]
 python_version = "3.6"
