@@ -1,4 +1,3 @@
-import json
 import os
 from datetime import datetime
 
@@ -43,6 +42,6 @@ class CommandAcceptPhoto(Command):
     def _save_photo(self, message):
         file = message['photo'][3]
         file_response = self.api.post(os.environ.get('URL') + "getFile",
-                                      data=json.dumps({'file_id': file['file_id']})).json()
+                                      data={'file_id': file['file_id']}).json()
         # TODO: храннение фоток
         return file_response
