@@ -55,7 +55,7 @@ class CommandAcceptPhoto(Command):
         try:
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
             yd.mkdir('/{}'.format(work_name))
-            yd.upload(im, '/{}/{}'.format(work_name, file_response['result']['file_path'].split('/')[-1]))
+            yd.upload(img, '/{}/{}'.format(work_name, file_response['result']['file_path'].split('/')[-1]))
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]
