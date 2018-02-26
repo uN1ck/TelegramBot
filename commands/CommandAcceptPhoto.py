@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+import yadisk
 from PIL import Image
 from bson import ObjectId
 
@@ -53,15 +54,9 @@ class CommandAcceptPhoto(Command):
         q = None
         try:
 
-            def _send_request(type, addUrl="/", addHeaders={}, data=None):
-                headers = {"Accept": "*/*"}
-                headers.update(addHeaders)
-                url = "https://webdav.yandex.ru/" + addUrl
-                from requests import request
-                return request(type, url, headers=headers, auth=(os.environ.get('YA_LOGIN'), os.environ.get('YA_PASSWORD')),
-                               data=data)
+            yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
+            yd.upload(im, file_response['result']['file_path'])
 
-            q = _send_request("PUT", '/', data=img)
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]

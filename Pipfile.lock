@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "38ec05d0ad196237120d41a6ee906c6297005012bac59b207f5015e5edc33828"
+            "sha256": "abbb90286c377b038bb539a388c82beefbd9d6a31d85f976d15008d8fa1d22c1"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -220,11 +220,11 @@
             ],
             "version": "==0.14.1"
         },
-        "yadiskclient": {
+        "yadisk": {
             "hashes": [
-                "sha256:848d72b0461dc506f478c6d8a60325d691f860d0292071e814213adf9a2bf899"
+                "sha256:aeb6971d13f420b3eda3ad8ccbe7501d797fe0e6e0ece2f478c4362b20fc2284"
             ],
-            "version": "==0.5.0"
+            "version": "==1.2.4"
         }
     },
     "develop": {}

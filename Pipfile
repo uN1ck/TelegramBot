@@ -8,7 +8,7 @@ requests = "*"
 gunicorn = "*"
 python-telegram-bot = "*"
 pymongo = "*"
-YaDiskClient = "*"
+yadisk = "*"
 Pillow = "*"
 
 [requires]
