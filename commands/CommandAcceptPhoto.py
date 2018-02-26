@@ -3,6 +3,8 @@ from datetime import datetime
 
 from PIL import Image
 from bson import ObjectId
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 
 from commands.Command import Command
 from util import USER_TYPE
@@ -50,6 +52,13 @@ class CommandAcceptPhoto(Command):
 
         img.raw.decode_content = True
         im = Image.open(img.raw)
-        resp = [im.format, im.mode, im.size]
+        gauth = GoogleAuth()
+        gauth.LocalWebserverAuth()
+        drive = GoogleDrive(gauth)
 
+        file = drive.CreateFile({'title': '/{}/{}'.format('ololo', str(datetime.now().date()))})
+        file.SetContentFile(im)
+        file.Upload()
+
+        resp = [im.format, im.mode, im.size]
         return resp
