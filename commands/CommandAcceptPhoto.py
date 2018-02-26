@@ -26,7 +26,7 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
 
                 if 'photo' in message:
-                    response['debug'] = self._save_photo(message)  # fixme implement
+                    response['debug'] = self._save_photo(message, work['address'])  # fixme implement
 
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'photo_count': work['photo_count'] + 1}})
