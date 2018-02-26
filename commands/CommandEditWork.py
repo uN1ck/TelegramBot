@@ -3,8 +3,8 @@ import os
 
 from bson import ObjectId
 
-from app import CMD
 from commands.Command import Command
+from commands.CommandMenu import CommandMenu
 
 
 class CommandEditWork(Command):
@@ -16,7 +16,7 @@ class CommandEditWork(Command):
         work = works_collection.find_one({'_id': ObjectId(work_id)})
 
         if work is None:
-            response = CMD['menu'](arguments, message)
+            response = CommandMenu(self.client, self.api)(arguments, message)
         else:
             keyboard = {'inline_keyboard': [
                 [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
