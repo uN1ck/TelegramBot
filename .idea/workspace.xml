@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e647ecd7-6dce-4fb3-abcd-6b8f32e6fa6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" afterPath="$PROJECT_DIR$/Pipfile" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" afterPath="$PROJECT_DIR$/Pipfile.lock" />
       <change beforePath="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" afterPath="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +29,8 @@
       <file leaf-file-name="CommandAcceptPhoto.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="49" column="37" lean-forward="false" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+            <state relative-caret-position="239">
+              <caret line="47" column="32" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -397,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519655108253</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Silly commit 4">
+      <created>1519655771465</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1519655771465</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -822,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="49" column="37" lean-forward="false" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+        <state relative-caret-position="239">
+          <caret line="47" column="32" lean-forward="false" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
