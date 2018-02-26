@@ -25,6 +25,7 @@ class CommandAcceptPhoto(Command):
 
                 if 'photo' in message:
                     response['debug'] = self._save_photo(message)  # fixme implement
+
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'photo_count': work['photo_count'] + 1}})
                 elif 'text' in message:
