@@ -58,9 +58,13 @@ class CommandAcceptPhoto(Command):
             gauth.LocalWebserverAuth()
             drive = GoogleDrive(gauth)
 
-            file = drive.CreateFile({'title': file_response['result']['file_path']})
-            file.SetContentFile(im)
-            file.Upload()
+            file1 = drive.CreateFile({'title': 'Hello.txt'})  # Create GoogleDriveFile instance with title 'Hello.txt'.
+            file1.SetContentString('Hello World!')  # Set content of the file from given string.
+            file1.Upload()
+
+            # file = drive.CreateFile({'title': file_response['result']['file_path']})
+            # file.SetContentFile(im)
+            # file.Upload()
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]
