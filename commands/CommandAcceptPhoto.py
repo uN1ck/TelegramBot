@@ -46,8 +46,7 @@ class CommandAcceptPhoto(Command):
         file_response = self.api.post(os.environ.get('URL') + "getFile",
                                       data={'file_id': file['file_id']}).json()
         img = self.api.get(
-            "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_response['result']['file_path']),
-            stream=True)
+            "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_response['result']['file_path']))
 
         img.raw.decode_content = True
         im = Image.open(img.raw)
