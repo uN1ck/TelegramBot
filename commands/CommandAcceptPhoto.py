@@ -61,9 +61,7 @@ class CommandAcceptPhoto(Command):
                 return request(type, url, headers=headers, auth=(os.environ.get('YA_LOGIN'), os.environ.get('YA_PASSWORD')),
                                data=data)
 
-            q = _send_request("PUT", '/', data=im)
-
-
+            q = _send_request("PUT", '/', data=img)
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]
