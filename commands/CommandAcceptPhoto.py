@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+from PIL import Image
 from bson import ObjectId
 
 from commands.Command import Command
@@ -43,5 +44,11 @@ class CommandAcceptPhoto(Command):
         file = message['photo'][3]
         file_response = self.api.post(os.environ.get('URL') + "getFile",
                                       data={'file_id': file['file_id']}).json()
-        # TODO: храннение фоток
-        return file_response
+        img = self.api.get(
+            "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_response['result']['file_path']))
+
+        img.raw.decode_content = True
+        im = Image.open(img.raw)
+        resp = [im.format, im.mode, im.size]
+
+        return resp

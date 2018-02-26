@@ -9,6 +9,7 @@ gunicorn = "*"
 python-telegram-bot = "*"
 pymongo = "*"
 PyDrive = "*"
+Pillow = "*"
 
 [requires]
 python_version = "3.6"
