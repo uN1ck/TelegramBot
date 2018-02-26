@@ -41,7 +41,7 @@ class CommandAcceptPhoto(Command):
             response["text"] = "Вам не положено присылать фотографии"
         return response
 
-    def _save_photo(self, message):
+    def _save_photo(self, message, work_name):
         file = message['photo'][3]
         file_response = self.api.post(os.environ.get('URL') + "getFile",
                                       data={'file_id': file['file_id']}).json()
@@ -53,10 +53,9 @@ class CommandAcceptPhoto(Command):
         im = Image.open(img.raw)
         q = None
         try:
-
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
-            yd.upload(im, file_response['result']['file_path'])
-
+            yd.mkdir('/{}'.format(work_name))
+            yd.upload(im, '/{}/{}'.format(work_name, file_response['result']['file_path'].split('/')[-1]))
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]
