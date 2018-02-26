@@ -3,8 +3,6 @@ from datetime import datetime
 
 from PIL import Image
 from bson import ObjectId
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 
 from commands.Command import Command
 from util import USER_TYPE
@@ -54,17 +52,11 @@ class CommandAcceptPhoto(Command):
         im = Image.open(img.raw)
         q = None
         try:
-            gauth = GoogleAuth()
-            gauth.LocalWebserverAuth()
-            drive = GoogleDrive(gauth)
+            from YaDiskClient.YaDiskClient import YaDisk
+            disk = YaDisk(os.environ.get('YA_LOGIN'), os.environ.get('YA_PASSWORD'))
+            disk.upload(im, '/')  # upload local file src to remote file dst
+            # disk.download(src, dst)  # download remote file src to local file dst
 
-            file1 = drive.CreateFile({'title': 'Hello.txt'})  # Create GoogleDriveFile instance with title 'Hello.txt'.
-            file1.SetContentString('Hello World!')  # Set content of the file from given string.
-            file1.Upload()
-
-            # file = drive.CreateFile({'title': file_response['result']['file_path']})
-            # file.SetContentFile(im)
-            # file.Upload()
         except Exception as ex:
             q = ex
         resp = [im.format, im.mode, im.size, q]
