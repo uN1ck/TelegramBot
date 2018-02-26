@@ -52,10 +52,17 @@ class CommandAcceptPhoto(Command):
         im = Image.open(img.raw)
         q = None
         try:
-            from YaDiskClient.YaDiskClient import YaDisk
-            disk = YaDisk(os.environ.get('YA_LOGIN'), os.environ.get('YA_PASSWORD'))
-            disk.upload(im, '/')  # upload local file src to remote file dst
-            # disk.download(src, dst)  # download remote file src to local file dst
+
+            def _send_request(type, addUrl="/", addHeaders={}, data=None):
+                headers = {"Accept": "*/*"}
+                headers.update(addHeaders)
+                url = "https://webdav.yandex.ru/" + addUrl
+                from requests import request
+                return request(type, url, headers=headers, auth=(os.environ.get('YA_LOGIN'), os.environ.get('YA_PASSWORD')),
+                               data=data)
+
+            q = _send_request("PUT", '/', data=im)
+
 
         except Exception as ex:
             q = ex
