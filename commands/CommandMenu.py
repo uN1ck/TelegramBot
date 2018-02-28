@@ -27,7 +27,7 @@ class CommandMenu(Command):
             response['reply_markup'] = json.dumps(keyboard)
         elif user['user_type'] == USER_TYPE.TEAM.value:
             keyboard = {'inline_keyboard': [
-                [{'text': work['address'], 'callback_data': 'subscribe_work:{}]'.format(work['_id'])}] for work in works
+                [{'text': work['address'], 'callback_data': 'subscribe_work:{}'.format(work['_id'])}] for work in works
             ]}
             response['reply_markup'] = json.dumps(keyboard)
         else:
