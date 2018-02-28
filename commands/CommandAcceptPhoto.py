@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 
 import yadisk
-from PIL import Image
 from bson import ObjectId
 
 from commands.Command import Command
@@ -26,10 +25,12 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
 
                 if 'photo' in message:
-                    response['debug'] = self._save_photo(message, work['address'])  # fixme implement
-
-                    works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                         {'$set': {'photo_count': work['photo_count'] + 1}})
+                    if self._save_photo(message, work['address']):  # fixme implement
+                        response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]
+                        response["text"] = "Вам не положено присылать фотографии"
+                    else:
+                        works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
+                                                             {'$set': {'photo_count': work['photo_count'] + 1}})
                 elif 'text' in message:
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'messages': work['messages'] + [message['text']]}})
@@ -45,18 +46,19 @@ class CommandAcceptPhoto(Command):
         file = message['photo'][3]
         file_response = self.api.post(os.environ.get('URL') + "getFile",
                                       data={'file_id': file['file_id']}).json()
-        img = self.api.get(
-            "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'), file_response['result']['file_path']))
-
-        img.raw.decode_content = True
-        im = Image.open(img.raw)
-        q = None
+        download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
+                                                                        file_response['result']['file_path'])
         try:
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
             if not yd.exists('/{}'.format(work_name)):
                 yd.mkdir('/{}'.format(work_name))
-            yd.upload(im, '/{}/{}'.format(work_name, "{}.{}".format(datetime.now().date(), im.format)))
+            date_now = datetime.now()
+            if not yd.exists('/{}/{}/'.format(work_name, date_now)):
+                yd.mkdir('/{}/{}/'.format(work_name, date_now))
+
+            filename = "{}.{}".format(datetime.now().strftime('%H:%M:%S'), file_response['result']['file_path'].split('.')[-1])
+            yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
+
         except Exception as ex:
-            q = ex
-        resp = [im.format, im.mode, im.size, q]
-        return resp
+            return False
+        return True
