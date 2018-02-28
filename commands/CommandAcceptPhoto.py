@@ -57,7 +57,7 @@ class CommandAcceptPhoto(Command):
             if not yd.exists('/{}/{}/'.format(work_name, date_now)):
                 yd.mkdir('/{}/{}/'.format(work_name, date_now))
 
-            filename = "{}.{}".format(datetime.now().strftime('%H:%M:%S'), file_response['result']['file_path'].split('.')[-1])
+            filename = "{}.{}".format(datetime.now().strftime('%H %M %S'), file_response['result']['file_path'].split('.')[-1])
             response['debug_1'] = filename
             q = yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
             response['debug_2'] = q
