@@ -57,9 +57,9 @@ class CommandAcceptPhoto(Command):
                 yd.mkdir('/{}/{}/'.format(work_name, date_now))
 
             filename = "{}.{}".format(datetime.now().strftime('%H:%M:%S'), file_response['result']['file_path'].split('.')[-1])
-            response['debug'] = {'filename': filename}
-            yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
-
+            response['debug'] = filename
+            q = yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
+            response['debug_2'] = q
         except Exception as ex:
             return False
         return True
