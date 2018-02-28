@@ -23,7 +23,6 @@ class CommandAcceptPhoto(Command):
 
         if user is not None:
             if user['user_type'] == USER_TYPE.TEAM.value:
-
                 if 'photo' in message:
                     if not self._save_photo(message, work['address'], response):
                         response["text"] = "Не удалось сохранить фото, попробуйте еще раз"

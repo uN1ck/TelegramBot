@@ -1,3 +1,4 @@
+import json
 import os
 
 from bson import ObjectId
@@ -16,7 +17,9 @@ class CommandGetWorkReport(Command):
         response = {'chat_id': message['chat']['id']}
 
         work = works_collection.find_one({"_id": ObjectId(arguments[0])})
-
-        # TODO: Upload file logs
+        keyboard = {'inline_keyboard': [
+            [{"text": work['address'], "callback_data": "menu"}]
+        ]}
+        response['reply_markup'] = json.dumps(keyboard)
         response["text"] = "Работа по адерсу\n{}\nСообщения от бригады:\n{}".format(work['address'], "\n".join(work['messages']))
         return response
