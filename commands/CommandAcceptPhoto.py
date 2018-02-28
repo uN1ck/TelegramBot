@@ -62,5 +62,6 @@ class CommandAcceptPhoto(Command):
             q = yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
             response['debug_2'] = q
         except Exception as ex:
+            response['debug_e'] = ex
             return False
         return True
