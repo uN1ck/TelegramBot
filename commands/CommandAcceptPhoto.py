@@ -31,7 +31,7 @@ class CommandAcceptPhoto(Command):
                     else:
                         works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                              {'$set': {'photo_count': work['photo_count'] + 1}})
-                elif 'text' in message:
+                if 'text' in message:
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'messages': work['messages'] + [message['text']]}})
                 if 'debug' not in response:
@@ -58,7 +58,7 @@ class CommandAcceptPhoto(Command):
                 yd.mkdir('/{}/{}/'.format(work_name, date_now))
 
             filename = "{}.{}".format(datetime.now().strftime('%H:%M:%S'), file_response['result']['file_path'].split('.')[-1])
-            response['debug'] = filename
+            response['debug_1'] = filename
             q = yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
             response['debug_2'] = q
         except Exception as ex:
