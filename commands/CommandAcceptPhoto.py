@@ -25,7 +25,7 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
 
                 if 'photo' in message:
-                    if self._save_photo(message, work['address']):  # fixme implement
+                    if self._save_photo(message, work['address'], response):  # fixme implement
                         response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]
                         response["text"] = "Вам не положено присылать фотографии"
                     else:
@@ -42,7 +42,7 @@ class CommandAcceptPhoto(Command):
             response["text"] = "Вам не положено присылать фотографии"
         return response
 
-    def _save_photo(self, message, work_name):
+    def _save_photo(self, message, work_name, response):
         file = message['photo'][3]
         file_response = self.api.post(os.environ.get('URL') + "getFile",
                                       data={'file_id': file['file_id']}).json()
@@ -52,11 +52,12 @@ class CommandAcceptPhoto(Command):
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
             if not yd.exists('/{}'.format(work_name)):
                 yd.mkdir('/{}'.format(work_name))
-            date_now = datetime.now()
+            date_now = str(datetime.now().date())
             if not yd.exists('/{}/{}/'.format(work_name, date_now)):
                 yd.mkdir('/{}/{}/'.format(work_name, date_now))
 
             filename = "{}.{}".format(datetime.now().strftime('%H:%M:%S'), file_response['result']['file_path'].split('.')[-1])
+            response['debug'] = {'filename': filename}
             yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
 
         except Exception as ex:
