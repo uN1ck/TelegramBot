@@ -25,9 +25,8 @@ class CommandAcceptPhoto(Command):
             if user['user_type'] == USER_TYPE.TEAM.value:
 
                 if 'photo' in message:
-                    if self._save_photo(message, work['address'], response):  # fixme implement
-                        response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]
-                        response["text"] = "Вам не положено присылать фотографии"
+                    if not self._save_photo(message, work['address'], response):
+                        response["text"] = "Не удалось сохранить фото, попробуйте еще раз"
                     else:
                         works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                              {'$set': {'photo_count': work['photo_count'] + 1}})
@@ -58,10 +57,7 @@ class CommandAcceptPhoto(Command):
                 yd.mkdir('/{}/{}/'.format(work_name, date_now))
 
             filename = "{}.{}".format(datetime.now().strftime('%H %M %S'), file_response['result']['file_path'].split('.')[-1])
-            response['debug_1'] = filename
-            q = yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
-            response['debug_2'] = q
+            yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
         except Exception as ex:
-            response['debug_e'] = ex
             return False
         return True
