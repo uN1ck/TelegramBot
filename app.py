@@ -50,7 +50,7 @@ PRIVATE_CMD = {
 
     'accept_work_name': CommandAcceptWorkName(CLIENT, API),
     'accept_photo': CommandAcceptPhoto(CLIENT, API),
-
+    'меню': CommandMenu(CLIENT, API),
     'work_list': CommandDefault(CLIENT, API),  # fixme
 }
 

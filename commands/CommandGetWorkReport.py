@@ -18,7 +18,7 @@ class CommandGetWorkReport(Command):
 
         work = works_collection.find_one({"_id": ObjectId(arguments[0])})
         keyboard = {'inline_keyboard': [
-            [{"text": "Меню", "callback_data": "/меню"}]
+            [{"text": "Меню", "callback_data": "меню"}]
         ]}
         response['reply_markup'] = json.dumps(keyboard)
         response["text"] = "Работа по адерсу\n{}\nСообщения от бригады:\n{}".format(work['address'], "\n".join(work['messages']))
