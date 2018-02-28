@@ -32,10 +32,10 @@ CLIENT = MongoClient(os.environ.get('MONGODB_URI'))
 """
 
 PUBLIC_CMD = {
-    '/управление': CommandMaster(CLIENT, API),
-    '/бригада': CommandBrigade(CLIENT, API),
-    '/выход': CommandExit(CLIENT, API),
-    '/меню': CommandMenu(CLIENT, API),
+    '/manage': CommandMaster(CLIENT, API),
+    '/brigade': CommandBrigade(CLIENT, API),
+    '/exit': CommandExit(CLIENT, API),
+    '/menu': CommandMenu(CLIENT, API),
 }
 PRIVATE_CMD = {
     'default': CommandDefault(CLIENT, API),
@@ -50,7 +50,7 @@ PRIVATE_CMD = {
 
     'accept_work_name': CommandAcceptWorkName(CLIENT, API),
     'accept_photo': CommandAcceptPhoto(CLIENT, API),
-    'меню': CommandMenu(CLIENT, API),
+    'menu': CommandMenu(CLIENT, API),
     'work_list': CommandDefault(CLIENT, API),  # fixme
 }
 
