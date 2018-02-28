@@ -15,29 +15,32 @@ class CommandMaster(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         response = {'chat_id': message['chat']['id']}
 
-        user = users_collection.find_one({"username": message['chat']['username']})
-        if user is None:
-            user = {
-                "username": message['chat']['username'],
-                "user_type": USER_TYPE.MASTER.value,
-                "chat_id": message['chat']['id'],
-                "command": "default"
-            }
-            users_collection.insert(user)
-            response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(
-                message["from"].get("first_name"))
-
-            works = list(works_collection.find({}))
-
-            keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
-            for work in works:
-                if work['address'] is not None:
-                    keyboard['inline_keyboard'].append([
-                        {"text": work['address'],
-                         "callback_data": "edit_work:{}".format(work['_id'])}
-                    ])
-            response['reply_markup'] = json.dumps(keyboard)
-        else:
+        if arguments[0] != "экзорцист":
             response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
+        else:
+            user = users_collection.find_one({"username": message['chat']['username']})
+            if user is None:
+                user = {
+                    "username": message['chat']['username'],
+                    "user_type": USER_TYPE.MASTER.value,
+                    "chat_id": message['chat']['id'],
+                    "command": "default"
+                }
+                users_collection.insert(user)
+                response['text'] = "Здравствуйте, {}! Вы  зарегистрировались как Управляющий.".format(
+                    message["from"].get("first_name"))
+
+                works = list(works_collection.find({}))
+
+                keyboard = {'inline_keyboard': [[{"text": "Добавить объект", "callback_data": "create_work"}]]}
+                for work in works:
+                    if work['address'] is not None:
+                        keyboard['inline_keyboard'].append([
+                            {"text": work['address'],
+                             "callback_data": "edit_work:{}".format(work['_id'])}
+                        ])
+                response['reply_markup'] = json.dumps(keyboard)
+            else:
+                response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
 
         return response
