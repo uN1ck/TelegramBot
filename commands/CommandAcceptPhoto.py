@@ -34,7 +34,8 @@ class CommandAcceptPhoto(Command):
                 elif 'text' in message:
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                          {'$set': {'messages': work['messages'] + [message['text']]}})
-                response["text"] = "Принято по дате {}".format(datetime.now().date())
+                if 'debug' not in response:
+                    response["text"] = "Принято по дате {}".format(datetime.now().date())
             else:
                 response['debug'] = [user['user_type'], USER_TYPE.MASTER.value]
                 response["text"] = "Вам не положено присылать фотографии"
