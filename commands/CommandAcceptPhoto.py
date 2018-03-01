@@ -31,7 +31,8 @@ class CommandAcceptPhoto(Command):
                                                              {'$set': {'photo_count': work['photo_count'] + 1}})
                 if 'text' in message:
                     works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                         {'$set': {'messages': work['messages'] + [message['text']]}})
+                                                         {'$set': {'messages': [datetime.now().strftime("%Y-%m-%d %H:%I:%S"),
+                                                                                work['messages'] + [message['text']]]}})
                 if 'debug' not in response:
                     response["text"] = "Принято по дате {}".format(datetime.now().date())
             else:
