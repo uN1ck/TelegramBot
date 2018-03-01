@@ -15,8 +15,8 @@ class CommandMaster(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         response = {'chat_id': message['chat']['id']}
 
-        if arguments[0] != "экзорцист":
-            response["text"] = "Вы уже зарегистрирвоаны, требуется перерегистрация"
+        if len(arguments) > 0 and arguments[0] != "экзорцист":
+            response["text"] = "Неправильное ключевое слово"
         else:
             user = users_collection.find_one({"username": message['chat']['username']})
             if user is None:
