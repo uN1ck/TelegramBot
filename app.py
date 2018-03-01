@@ -10,9 +10,11 @@ from flask import Flask
 from flask import request
 from pymongo import MongoClient
 
+from commands.CommandAcceptPassword import CommandAcceptPassword
 from commands.CommandAcceptPhoto import CommandAcceptPhoto
 from commands.CommandAcceptWorkName import CommandAcceptWorkName
 from commands.CommandBrigade import CommandBrigade
+from commands.CommandCheckPassword import CommandCheckPassword
 from commands.CommandCreateWork import CommandCreateWork
 from commands.CommandDefault import CommandDefault
 from commands.CommandDeleteWork import CommandDeleteWork
@@ -45,13 +47,13 @@ PRIVATE_CMD = {
     'delete_work': CommandDeleteWork(CLIENT, API),
 
     'subscribe_work': CommandSubscribeWork(CLIENT, API),
-    'finish_work': CommandDefault(CLIENT, API),  # fixme
     'get_work_report': CommandGetWorkReport(CLIENT, API),
 
     'accept_work_name': CommandAcceptWorkName(CLIENT, API),
     'accept_photo': CommandAcceptPhoto(CLIENT, API),
     'menu': CommandMenu(CLIENT, API),
-    'work_list': CommandDefault(CLIENT, API),  # fixme
+    'accept_password': CommandAcceptPassword(CLIENT, API),
+    'check_password': CommandCheckPassword(CLIENT, API)
 }
 
 CMD = PRIVATE_CMD.copy()

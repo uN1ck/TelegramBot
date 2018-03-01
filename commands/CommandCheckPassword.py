@@ -32,5 +32,4 @@ class CommandCheckPassword(Command):
         else:
             response['text'] = 'Пароль не принят'
 
-
         return response

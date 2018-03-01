@@ -1,6 +1,7 @@
 import os
 
 from bson import ObjectId
+from flask import json
 
 from commands.Command import Command
 
@@ -18,8 +19,8 @@ class CommandAcceptPassword(Command):
             {'username': message['chat']['username']},
             {"$set": {'command': 'default'}})
 
-        work = works_collection.update_one({'_id': ObjectId(arguments[0])},
-                                           {'$set': {'password': message['text']}}).raw_result
+        works_collection.update_one({'_id': ObjectId(arguments[0])},
+                                    {'$set': {'password': message['text']}})
 
         response = {'chat_id': message['chat']['id'], 'text': 'Пароль по работе принят'}
         works = list(works_collection.find({}))
