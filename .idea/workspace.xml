@@ -30,18 +30,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandAcceptPassword.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPassword.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CommandCreateWork.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandCreateWork.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,23 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandCheckPassword.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commands/CommandCheckPassword.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="94" lean-forward="true" selection-start-line="20" selection-start-column="82" selection-end-line="20" selection-end-column="94" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandAcceptPhoto.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CommandAcceptPhoto.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="33" column="125" lean-forward="false" selection-start-line="33" selection-start-column="125" selection-end-line="33" selection-end-column="125" />
+            <state relative-caret-position="417">
+              <caret line="35" column="96" lean-forward="false" selection-start-line="35" selection-start-column="96" selection-end-line="35" selection-end-column="96" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -90,7 +66,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandGetWorkReport.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommandGetWorkReport.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandGetWorkReport.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
@@ -178,8 +154,8 @@
         <option value="$PROJECT_DIR$/commands/CommandCheckPassword.py" />
         <option value="$PROJECT_DIR$/commands/CommandAcceptPassword.py" />
         <option value="$PROJECT_DIR$/commands/CommandCreateWork.py" />
-        <option value="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" />
         <option value="$PROJECT_DIR$/commands/CommandGetWorkReport.py" />
+        <option value="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" />
       </list>
     </option>
   </component>
@@ -352,13 +328,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516107120666</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Silly commit 2">
-      <created>1519653677879</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1519653677879</updated>
     </task>
     <task id="LOCAL-00014" summary="Silly commit 4">
       <created>1519653957701</created>
@@ -696,7 +665,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519911520376</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="fix">
+      <created>1519911892407</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1519911892408</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1060,22 +1036,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="33" column="125" lean-forward="false" selection-start-line="33" selection-start-column="125" selection-end-line="33" selection-end-column="125" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandGetWorkReport.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="127" lean-forward="false" selection-start-line="23" selection-start-column="127" selection-end-line="23" selection-end-column="127" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="35" column="96" lean-forward="false" selection-start-line="35" selection-start-column="96" selection-end-line="35" selection-end-column="96" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
