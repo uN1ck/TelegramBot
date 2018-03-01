@@ -1,4 +1,3 @@
-import json
 import os
 
 from bson import ObjectId
@@ -17,21 +16,10 @@ class CommandAcceptWorkName(Command):
 
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
-            {"$set": {'command': 'default'}})
+            {"$set": {'command': 'accept_password:{}'.format(arguments[0])}})
 
         work = works_collection.update_one({'_id': ObjectId(arguments[0])},
                                            {'$set': {'address': message['text']}}).raw_result
 
-        response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан'}
-        works = list(works_collection.find({}))
-
-        keyboard = {'inline_keyboard': [
-            [{'text': 'Добавить объект', 'callback_data': 'create_work'}]
-        ]}
-        for work in works:
-            if work['address'] is not None:
-                keyboard['inline_keyboard'].append(
-                    [{'text': work['address'], 'callback_data': 'edit_work:{}'.format(work['_id'])}])
-        response['reply_markup'] = json.dumps(keyboard)
-
+        response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан, введите пароль:'}
         return response

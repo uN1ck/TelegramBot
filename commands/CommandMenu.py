@@ -16,6 +16,10 @@ class CommandMenu(Command):
 
         response = {'chat_id': message['chat']['id'], 'text': 'Объекты:'}
         works = list(works_collection.find({}))
+
+        users_collection.find_one_and_update(
+            {'username': message['chat']['username']},
+            {"$set": {'command': 'default'}})
         user = users_collection.find_one({'username': message['chat']['username']})
 
         if user['user_type'] == USER_TYPE.MASTER.value:
