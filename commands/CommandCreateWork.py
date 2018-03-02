@@ -26,6 +26,6 @@ class CommandCreateWork(Command):
             {"$set": {'command': 'accept_work_name:{}'.format(result.inserted_id)}})
         response = {
             'chat_id': message['chat']['id'],
-            'text': 'Задайте адрес для работы и кодовое слово в формате "<название>!<кодовое слово>" ',
+            'text': 'Задайте адрес для работы: ',
         }
         return response

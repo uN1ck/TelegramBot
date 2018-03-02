@@ -23,6 +23,7 @@ from commands.CommandExit import CommandExit
 from commands.CommandGetWorkReport import CommandGetWorkReport
 from commands.CommandMaster import CommandMaster
 from commands.CommandMenu import CommandMenu
+from commands.CommandStart import CommandStart
 from commands.CommandSubscribeWork import CommandSubscribeWork
 
 API = requests.Session()
@@ -34,6 +35,7 @@ CLIENT = MongoClient(os.environ.get('MONGODB_URI'))
 """
 
 PUBLIC_CMD = {
+    '/start': CommandStart(CLIENT, API),
     '/manage': CommandMaster(CLIENT, API),
     '/brigade': CommandBrigade(CLIENT, API),
     '/exit': CommandExit(CLIENT, API),
