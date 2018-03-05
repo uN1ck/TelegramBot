@@ -13,7 +13,7 @@ class CommandCreateWork(Command):
 
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
-            {"$set": {'command': 'accept_work_name'}})
+            {"$set": {'command': 'accept_work_name:0'}})
         response = {
             'chat_id': message['chat']['id'],
             'text': 'Задайте адрес для работы: ',

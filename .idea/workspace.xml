@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e647ecd7-6dce-4fb3-abcd-6b8f32e6fa6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" afterPath="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" />
       <change beforePath="$PROJECT_DIR$/commands/CommandCreateWork.py" afterPath="$PROJECT_DIR$/commands/CommandCreateWork.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +33,8 @@
       <file leaf-file-name="CommandCreateWork.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandCreateWork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="77" lean-forward="false" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+            <state relative-caret-position="225">
+              <caret line="15" column="52" lean-forward="false" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -315,13 +314,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516107120666</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Silly commit 4">
-      <created>1519655108253</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1519655108253</updated>
     </task>
     <task id="LOCAL-00020" summary="Silly commit 4">
       <created>1519655771465</created>
@@ -659,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520219644762</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="fix">
+      <created>1520219824666</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1520219824666</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1008,16 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/CommandSubscribeWork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
@@ -1028,10 +1017,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commands/CommandSubscribeWork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandCreateWork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="77" lean-forward="false" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+        <state relative-caret-position="225">
+          <caret line="15" column="52" lean-forward="false" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
