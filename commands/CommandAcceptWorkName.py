@@ -22,11 +22,11 @@ class CommandAcceptWorkName(Command):
                 "messages": [],
                 "password": "password",
             }
-            result = works_collection.insert_one(work)
+            result = works_collection.insert_one(work).raw_result
 
             users_collection.find_one_and_update(
                 {'username': message['chat']['username']},
-                {"$set": {'command': 'accept_password:{}'.format(result)}})
+                {"$set": {'command': 'accept_password:{}'.format(result['_id'])}})
             response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан, введите пароль:'}
         else:
 
