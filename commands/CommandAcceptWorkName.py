@@ -26,7 +26,7 @@ class CommandAcceptWorkName(Command):
 
             users_collection.find_one_and_update(
                 {'username': message['chat']['username']},
-                {"$set": {'command': 'accept_password:{}'.format(arguments[0])}})
+                {"$set": {'command': 'accept_password:{}'.format(result)}})
             response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан, введите пароль:'}
         else:
 

@@ -10,7 +10,6 @@ class CommandCreateWork(Command):
     def __call__(self, arguments: list, message: dict) -> dict:
         database = self.client[os.environ.get('MONGO_DBNAME')]
         users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
-        works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
         users_collection.find_one_and_update(
             {'username': message['chat']['username']},
