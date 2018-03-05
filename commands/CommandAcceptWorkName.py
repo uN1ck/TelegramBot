@@ -12,7 +12,7 @@ class CommandAcceptWorkName(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-        if works_collection.find({'address': message['text']}) is None:
+        if works_collection.find_one({'address': message['text']}) is None:
 
             work = {
                 "master": message['chat']['username'],
