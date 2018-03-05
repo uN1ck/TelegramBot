@@ -120,6 +120,8 @@ def webhook_handler():
                     print("#COMMAND: {}".format(command))
                     if ':' in command:
                         command = command.split(':')
+                    else:
+                        command = [command]
                     response = CMD.get(command[0], PRIVATE_CMD['default'])(command[1:], message)
                     print("#RESPONSE: {}".format(response))
                     send_reply(response)
