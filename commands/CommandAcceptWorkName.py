@@ -1,7 +1,5 @@
 import os
 
-from bson import ObjectId
-
 from commands.Command import Command
 
 
@@ -14,12 +12,23 @@ class CommandAcceptWorkName(Command):
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-        users_collection.find_one_and_update(
-            {'username': message['chat']['username']},
-            {"$set": {'command': 'accept_password:{}'.format(arguments[0])}})
+        if len(works_collection.find({'address': message['text']})) > 0:
 
-        work = works_collection.update_one({'_id': ObjectId(arguments[0])},
-                                           {'$set': {'address': message['text']}}).raw_result
+            work = {
+                "master": message['chat']['username'],
+                "address": message['text'],
+                "brigade": None,
+                "photo_count": 0,
+                "messages": [],
+                "password": "password",
+            }
+            result = works_collection.insert_one(work)
 
-        response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан, введите пароль:'}
+            users_collection.find_one_and_update(
+                {'username': message['chat']['username']},
+                {"$set": {'command': 'accept_password:{}'.format(arguments[0])}})
+            response = {'chat_id': message['chat']['id'], 'text': 'Адрес работы задан, введите пароль:'}
+        else:
+
+            response = {'chat_id': message['chat']['id'], 'text': 'Такой адрес уже существует, введите другой'}
         return response
