@@ -8,7 +8,7 @@ def notify():
     database = CLIENT[os.environ.get('MONGO_DBNAME')]
     users_collection = database[os.environ.get('MONGO_COLLECTION_USERS')]
 
-    users = list(users_collection.find({"user_type": USER_TYPE.TEAM.value,}))
+    users = list(users_collection.find({"user_type": USER_TYPE.TEAM.value}))
 
     for item in users:
         response = {
