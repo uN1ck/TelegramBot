@@ -15,3 +15,5 @@ def notify():
             'text': "Не забудьте выставить фотографии!"
         }
         API.post(os.environ.get('URL') + "sendMessage", data=response)
+
+notify()
