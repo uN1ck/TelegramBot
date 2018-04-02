@@ -21,6 +21,7 @@ class CommandAcceptWorkName(Command):
                 "photo_count": 0,
                 "messages": [],
                 "password": "password",
+                "photo_dates": [],
             }
             result = works_collection.insert_one(work)
 

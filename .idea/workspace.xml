@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e647ecd7-6dce-4fb3-abcd-6b8f32e6fa6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/CommandEditWork.py" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandEditWork.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,20 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CommandAcceptPassword.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPassword.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CommandAcceptWorkName.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+            <state relative-caret-position="210">
+              <caret line="14" column="74" lean-forward="true" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -50,11 +42,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandAcceptPhoto.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommandEditWork.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/commands/CommandEditWork.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandAcceptPhoto.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
+            <state relative-caret-position="359">
+              <caret line="35" column="116" lean-forward="true" selection-start-line="35" selection-start-column="107" selection-end-line="35" selection-end-column="116" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -122,7 +126,6 @@
         <option value="$PROJECT_DIR$/commands/CommandDeleteWork.py" />
         <option value="$PROJECT_DIR$/commands/CommandBrigade.py" />
         <option value="$PROJECT_DIR$/commands/Command.py" />
-        <option value="$PROJECT_DIR$/commands/CommandEditWork.py" />
         <option value="$PROJECT_DIR$/mmm.py" />
         <option value="$PROJECT_DIR$/mam.py" />
         <option value="$PROJECT_DIR$/Pipfile" />
@@ -136,10 +139,11 @@
         <option value="$PROJECT_DIR$/commands/CommandStart.py" />
         <option value="$PROJECT_DIR$/commands/CommandCreateWork.py" />
         <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" />
         <option value="$PROJECT_DIR$/commands/CommandTimeNotifier.py" />
         <option value="$PROJECT_DIR$/TimeEvent.py" />
         <option value="$PROJECT_DIR$/commands/CommandAcceptPhoto.py" />
+        <option value="$PROJECT_DIR$/commands/CommandAcceptWorkName.py" />
+        <option value="$PROJECT_DIR$/commands/CommandEditWork.py" />
       </list>
     </option>
   </component>
@@ -656,7 +660,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.27878788" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3287483" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.16606061" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2267525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2267525" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -930,13 +934,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/CommandEditWork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="10" selection-start-line="10" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandExit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -989,18 +986,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandCreateWork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+        <state relative-caret-position="150">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -1014,12 +1001,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
+    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
+        <state relative-caret-position="210">
+          <caret line="14" column="74" lean-forward="true" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/CommandAcceptPhoto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="35" column="116" lean-forward="true" selection-start-line="35" selection-start-column="107" selection-end-line="35" selection-end-column="116" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/CommandEditWork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
