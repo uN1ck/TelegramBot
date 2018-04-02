@@ -51,10 +51,10 @@ class CommandAcceptPhoto(Command):
         download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
                                                                         file_response['result']['file_path'])
 
-        database = self.client[os.environ.get('MONGO_DBNAME')]
-        works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
-
         try:
+            database = self.client[os.environ.get('MONGO_DBNAME')]
+            works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
+
             response['debug'] = {'arguments': arguments, 'response': file_response['result']}
             works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                  {'$push': {'photo_dates': file_response['result']['file_path']}})
