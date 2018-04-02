@@ -46,10 +46,11 @@ class CommandAcceptPhoto(Command):
 
     def _save_photo(self, message, work_name, response, arguments):
         try:
+            response['debug'] = {'photo': message['photo']}
             file = message['photo'][3]
             file_response = self.api.post(os.environ.get('URL') + "getFile",
                                           data={'file_id': file['file_id']}).json()
-            response['debug'] = {'arguments': arguments, 'response': file_response['result']}
+
             download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
                                                                             file_response['result']['file_path'])
             database = self.client[os.environ.get('MONGO_DBNAME')]
