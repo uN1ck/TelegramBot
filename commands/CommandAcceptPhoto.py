@@ -50,14 +50,14 @@ class CommandAcceptPhoto(Command):
             file = message['photo'][len(message['photo']) - 1]
             file_response = self.api.post(os.environ.get('URL') + "getFile",
                                           data={'file_id': file['file_id']}).json()
-            response['debug'] = {'response': file_response, 'file': file}
+
             download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
                                                                             file_response['result']['file_path'])
             database = self.client[os.environ.get('MONGO_DBNAME')]
             works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
             works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                 {'$push': {'photo_dates': file_response['result']['file_path']}})
+                                                 {'$push': {'photo_dates': file['file_id']}})
 
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
             if not yd.exists('/{}'.format(work_name)):
@@ -69,6 +69,6 @@ class CommandAcceptPhoto(Command):
             filename = "{}.{}".format(datetime.now().strftime('%H %M %S'), file_response['result']['file_path'].split('.')[-1])
             yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
         except Exception as ex:
-            response['debug']['ex'] = ex
+            response['debug'] = {'ex': ex}
             return False
         return True
