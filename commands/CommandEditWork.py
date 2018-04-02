@@ -22,8 +22,9 @@ class CommandEditWork(Command):
 
             works_list = [datetime.strptime(item.split('|')[0], '%Y-%m-%d') for item in work['photo_dates']]
             works_set = set(works_list)
-            works_button = [{"text": str(item.strftime('%Y-%m-%d')), "callback_data": "return_photo_by_date:{}".format(item)} for
-                            item in works_set]
+            works_button = [
+                [{"text": str(item.strftime('%Y-%m-%d')), "callback_data": "return_photo_by_date:{}:".format(item, arguments[0])}]
+                for item in works_set]
 
             keyboard = {'inline_keyboard': [
                 works_button + [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
