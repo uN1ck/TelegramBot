@@ -54,9 +54,7 @@ class CommandAcceptPhoto(Command):
         database = self.client[os.environ.get('MONGO_DBNAME')]
         works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
         works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                             {'$pushAll': {
-                                                 'photo_dates': [
-                                                     {str(datetime.now().date()): file_response['result']['file_path']}]}})
+                                             {'$push': {'photo_dates': file_response['result']['file_path']}})
 
         try:
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
