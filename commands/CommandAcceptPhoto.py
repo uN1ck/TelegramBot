@@ -57,7 +57,7 @@ class CommandAcceptPhoto(Command):
             works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
             works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
-                                                 {'$push': {"{}|{}".format(str(datetime.now()), file['file_id'])}})
+                                                 {'$push': {"{}|{}".format(str(datetime.now().date()), file['file_id'])}})
 
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
             if not yd.exists('/{}'.format(work_name)):
