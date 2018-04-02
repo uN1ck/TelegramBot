@@ -46,11 +46,11 @@ class CommandAcceptPhoto(Command):
 
     def _save_photo(self, message, work_name, response, arguments):
         try:
-            response['debug'] = {'photo': message['photo']}
-            file = message['photo'][3]
+
+            file = message['photo'][len(message['photo']) - 1]
             file_response = self.api.post(os.environ.get('URL') + "getFile",
                                           data={'file_id': file['file_id']}).json()
-
+            response['debug'] = {'response': file_response, 'file': file}
             download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
                                                                             file_response['result']['file_path'])
             database = self.client[os.environ.get('MONGO_DBNAME')]
@@ -69,5 +69,6 @@ class CommandAcceptPhoto(Command):
             filename = "{}.{}".format(datetime.now().strftime('%H %M %S'), file_response['result']['file_path'].split('.')[-1])
             yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
         except Exception as ex:
+            response['debug']['ex'] = ex
             return False
         return True
