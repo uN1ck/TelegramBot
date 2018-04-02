@@ -45,17 +45,16 @@ class CommandAcceptPhoto(Command):
         return response
 
     def _save_photo(self, message, work_name, response, arguments):
-        file = message['photo'][3]
-        file_response = self.api.post(os.environ.get('URL') + "getFile",
-                                      data={'file_id': file['file_id']}).json()
-        download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
-                                                                        file_response['result']['file_path'])
-
         try:
+            file = message['photo'][3]
+            file_response = self.api.post(os.environ.get('URL') + "getFile",
+                                          data={'file_id': file['file_id']}).json()
+            response['debug'] = {'arguments': arguments, 'response': file_response['result']}
+            download_link = "https://api.telegram.org/file/bot{}/{}".format(os.environ.get('BOT_TOKEN'),
+                                                                            file_response['result']['file_path'])
             database = self.client[os.environ.get('MONGO_DBNAME')]
             works_collection = database[os.environ.get('MONGO_COLLECTION_WORKS')]
 
-            response['debug'] = {'arguments': arguments, 'response': file_response['result']}
             works_collection.find_one_and_update({"_id": ObjectId(arguments[0])},
                                                  {'$push': {'photo_dates': file_response['result']['file_path']}})
 
