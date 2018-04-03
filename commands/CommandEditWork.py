@@ -25,13 +25,12 @@ class CommandEditWork(Command):
             works_button = [
                 [{"text": str(item.strftime('%Y-%m-%d')), "callback_data": "return_photo_by_date:{}:".format(item, arguments[0])}]
                 for item in works_set]
-            response['debug2'] = works_button
             try:
                 keyboard = {'inline_keyboard': [
                     works_button + [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
                                     {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
                 ]}
-                response['text'] = {'reply_markup': json.dumps(keyboard)}
+                response['reply_markup'] = {'reply_markup': json.dumps(keyboard)}
             except Exception as ex:
                 response['debug'] = {'ex': ex}
             response['text'] = "Работа по адресу:\n{}\nФотографий: {}".format(work['address'], work['photo_count']),
