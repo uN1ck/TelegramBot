@@ -105,6 +105,7 @@ def webhook_handler():
             print(" --> Update JSON data:{}".format(update))
             if 'callback_query' in update:
                 response = button_callback(update['callback_query']['data'], update['callback_query']['message'])
+                print(" --> RESPONSE: {}".format(response))
                 send_reply(response)
             else:
                 message = update['message']
