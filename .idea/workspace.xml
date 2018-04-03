@@ -20,7 +20,7 @@
       <file leaf-file-name="CommandAcceptWorkName.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state>
               <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -44,22 +44,10 @@
       <file leaf-file-name="CommandEditWork.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/CommandEditWork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+            <state relative-caret-position="450">
+              <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandReturnPhotoByName.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commands/CommandReturnPhotoByName.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="94" selection-start-line="21" selection-start-column="94" selection-end-line="21" selection-end-column="94" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +56,8 @@
       <file leaf-file-name="CommandMenu.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CommandMenu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="35" column="34" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+            <state relative-caret-position="375">
+              <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -984,7 +972,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandAcceptWorkName.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state>
           <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1017,15 +1005,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandMenu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="35" column="34" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+        <state relative-caret-position="375">
+          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CommandEditWork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+        <state relative-caret-position="450">
+          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
