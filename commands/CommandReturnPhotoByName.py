@@ -19,6 +19,6 @@ class CommandReturnPhotoByName(Command):
         work = works_collection.find_one({'_id': ObjectId(work_id)})
 
         works_list = [item.split('|') for item in work['photo_dates'] if item.split('|')[0] == arguments[0]]
-        response['series'] = [{'method': 'sendPhoto', 'photo_id':item} for item in works_list]
+        response['series'] = [{'method': 'sendPhoto', 'photo_id':item[1]} for item in works_list]
 
         return response
