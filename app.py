@@ -24,6 +24,7 @@ from commands.CommandExit import CommandExit
 from commands.CommandGetWorkReport import CommandGetWorkReport
 from commands.CommandMaster import CommandMaster
 from commands.CommandMenu import CommandMenu
+from commands.CommandReturnPhotoByName import CommandReturnPhotoByName
 from commands.CommandStart import CommandStart
 from commands.CommandSubscribeWork import CommandSubscribeWork
 
@@ -52,6 +53,7 @@ PRIVATE_CMD = {
     'subscribe_work': CommandSubscribeWork(CLIENT, API),
     'get_work_report': CommandGetWorkReport(CLIENT, API),
 
+    'return_photo_by_name': CommandReturnPhotoByName(CLIENT, API),
     'accept_work_name': CommandAcceptWorkName(CLIENT, API),
     'accept_photo': CommandAcceptPhoto(CLIENT, API),
     'menu': CommandMenu(CLIENT, API),
