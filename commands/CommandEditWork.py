@@ -30,7 +30,7 @@ class CommandEditWork(Command):
                     [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
                      {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
                 ]}
-                response['reply_markup'] = {'reply_markup': json.dumps(keyboard, ensure_ascii=False)}
+                response['reply_markup'] = {'reply_markup': json.dumps(keyboard)}
             except Exception as ex:
                 response['debug'] = {'ex': ex}
             response['text'] = "Работа по адресу:\n{}\nФотографий: {}".format(work['address'], work['photo_count']),
