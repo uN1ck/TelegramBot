@@ -53,7 +53,7 @@ PRIVATE_CMD = {
     'subscribe_work': CommandSubscribeWork(CLIENT, API),
     'get_work_report': CommandGetWorkReport(CLIENT, API),
 
-    'return_photo_by_name': CommandReturnPhotoByName(CLIENT, API),
+    'return_photo_by_date': CommandReturnPhotoByName(CLIENT, API),
     'accept_work_name': CommandAcceptWorkName(CLIENT, API),
     'accept_photo': CommandAcceptPhoto(CLIENT, API),
     'menu': CommandMenu(CLIENT, API),
