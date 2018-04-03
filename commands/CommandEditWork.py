@@ -25,11 +25,12 @@ class CommandEditWork(Command):
             works_button = [
                 [{"text": item.strftime('%Y-%m-%d'), "callback_data": "return_photo_by_date:{}:{}".format(item, arguments[0])}]
                 for item in works_set]
+            keyboard = {'inline_keyboard': works_button}
             try:
-                keyboard = {'inline_keyboard': [
-                    works_button + [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
-                                    {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
-                ]}
+                keyboard['inline_keyboard'] += [
+                    [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
+                     {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
+                ]
                 response['reply_markup'] = json.dumps(keyboard)
             except Exception as ex:
                 response['debug'] = {'ex': ex}
