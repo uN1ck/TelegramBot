@@ -3,7 +3,6 @@
 Данный модуль отвечает за обработку комманд, присланных пользователями телеграм-боту
 
 """
-import json
 import os
 
 import requests
@@ -75,7 +74,7 @@ def send_reply(response):
     elif 'series' in response:
         for item in response['series']:
             API.post(os.environ.get('URL') + item['method'],
-                     data=json.dumps({'chat_id': response['chat_id'], 'photo': item['photo_id']}))
+                     data={'chat_id': response['chat_id'], 'photo': item['photo_id']})
     elif 'text' in response:
         API.post(os.environ.get('URL') + "sendMessage", data=response)
 
