@@ -28,8 +28,8 @@ class CommandEditWork(Command):
             keyboard = {'inline_keyboard': works_button}
             try:
                 keyboard['inline_keyboard'] += [
-                    [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)},
-                     {"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
+                    [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)}],
+                    [{"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
                 ]
                 response['reply_markup'] = json.dumps(keyboard)
             except Exception as ex:
