@@ -27,9 +27,9 @@ class CommandEditWork(Command):
             response['debug'] = keyboard
             try:
                 keyboard['inline_keyboard'] = [
-                    [[{"text": item.strftime('%Y-%m-%d'),
-                       "callback_data": "return_photo_by_date:{}:{}".format(item.strftime('%Y-%m-%d'), arguments[0])}]
-                     for item in works_set],
+                    *[[{"text": item.strftime('%Y-%m-%d'),
+                        "callback_data": "return_photo_by_date:{}:{}".format(item.strftime('%Y-%m-%d'), arguments[0])}]
+                      for item in works_set],
                     [{"text": "Отчет", "callback_data": "get_work_report:{}".format(work_id)}],
                     [{"text": "Удалить", "callback_data": "delete_work:{}".format(work_id)}]
                 ]
