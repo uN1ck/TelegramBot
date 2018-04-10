@@ -61,14 +61,17 @@ class CommandAcceptPhoto(Command):
                                                      'photo_dates': "{}|{}".format(str(datetime.now().date()), file['file_id'])}})
 
             yd = yadisk.YaDisk(os.environ.get('YA_ID'), os.environ.get('YA_SECRET'), os.environ.get('YA_TOKEN'))
-            if not yd.exists('/{}'.format(work_name)):
-                yd.mkdir('/{}'.format(work_name))
+            # BotTelegram_Photo
+            if not yd.exists('/BotTelegram_Photo'):
+                yd.mkdir('/BotTelegram_Photo')
+            if not yd.exists('/BotTelegram_Photo/{}'.format(work_name)):
+                yd.mkdir('/BotTelegram_Photo/{}'.format(work_name))
             date_now = str(datetime.now().date())
-            if not yd.exists('/{}/{}/'.format(work_name, date_now)):
-                yd.mkdir('/{}/{}/'.format(work_name, date_now))
+            if not yd.exists('/BotTelegram_Photo/{}/{}/'.format(work_name, date_now)):
+                yd.mkdir('/BotTelegram_Photo/{}/{}/'.format(work_name, date_now))
 
             filename = "{}.{}".format(datetime.now().strftime('%H %M %S'), file_response['result']['file_path'].split('.')[-1])
-            yd.upload_url(download_link, '/{}/{}/{}'.format(work_name, date_now, filename))
+            yd.upload_url(download_link, '/BotTelegram_Photo/{}/{}/{}'.format(work_name, date_now, filename))
         except Exception as ex:
             response['debug'] = {'ex': ex}
             return False
